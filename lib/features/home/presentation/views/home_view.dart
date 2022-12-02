@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+import '../widgets/slider_banner_page_view.dart';
+
 class HomeView extends StatelessWidget {
   const HomeView({super.key});
 
@@ -15,17 +17,7 @@ class HomeView extends StatelessWidget {
             child: SizedBox(
               width: screenSize.width,
               height: 200,
-              child: PageView.builder(
-                padEnds: false,
-                itemCount: 5,
-                controller: PageController(viewportFraction: 0.8),
-                itemBuilder: (context, index) {
-                  return const Padding(
-                    padding: EdgeInsets.all(8.0),
-                    child: ColoredBox(color: Colors.red),
-                  );
-                },
-              ),
+              child: const SliderBannerPageView(),
             ),
           ),
 
