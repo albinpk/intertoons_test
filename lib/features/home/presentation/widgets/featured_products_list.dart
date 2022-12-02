@@ -1,10 +1,8 @@
 import 'package:flutter/material.dart';
 
 /// Featured products list view.
-class FeaturedProducts extends StatelessWidget {
-  const FeaturedProducts({
-    Key? key,
-  }) : super(key: key);
+class FeaturedProductsList extends StatelessWidget {
+  const FeaturedProductsList({super.key});
 
   @override
   Widget build(BuildContext context) {

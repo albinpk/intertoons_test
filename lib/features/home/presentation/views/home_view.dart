@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 
 import '../widgets/slider_banner_page_view.dart';
-import '../widgets/featured_products.dart';
 import '../widgets/best_sellers_list.dart';
+import '../widgets/featured_products_list.dart';
 import '../widgets/home_app_bar.dart';
 
 class HomeView extends StatelessWidget {
@@ -32,7 +32,7 @@ class HomeView extends StatelessWidget {
             child: SizedBox(
               width: screenSize.width,
               height: 150,
-              child: const FeaturedProducts(),
+              child: const FeaturedProductsList(),
             ),
           ),
 
