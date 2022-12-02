@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 
 import '../widgets/slider_banner_page_view.dart';
 import '../widgets/featured_products.dart';
+import '../widgets/best_sellers_list.dart';
 import '../widgets/home_app_bar.dart';
 
 class HomeView extends StatelessWidget {
@@ -51,26 +52,7 @@ class HomeView extends StatelessWidget {
           const SliverToBoxAdapter(
             child: Text('Best sellers'),
           ),
-          SliverList(
-            delegate: SliverChildBuilderDelegate(
-              childCount: 10,
-              (context, index) {
-                return Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: Row(
-                    children: const [
-                      SizedBox.square(
-                        dimension: 80,
-                        child: ColoredBox(color: Colors.green),
-                      ),
-                      SizedBox(width: 10),
-                      Text('Item'),
-                    ],
-                  ),
-                );
-              },
-            ),
-          ),
+          const BestSellersList(),
         ],
       ),
     );
