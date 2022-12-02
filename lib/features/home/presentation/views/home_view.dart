@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import '../widgets/slider_banner_page_view.dart';
+import '../widgets/featured_products.dart';
 import '../widgets/home_app_bar.dart';
 
 class HomeView extends StatelessWidget {
@@ -30,30 +31,7 @@ class HomeView extends StatelessWidget {
             child: SizedBox(
               width: screenSize.width,
               height: 150,
-              child: Column(
-                children: [
-                  const Text('Featured'),
-                  Expanded(
-                    child: ListView.builder(
-                      scrollDirection: Axis.horizontal,
-                      itemBuilder: (context, index) {
-                        return const Padding(
-                          padding: EdgeInsets.all(8.0),
-                          child: SizedBox(
-                            width: 200,
-                            child: ColoredBox(
-                              color: Colors.blue,
-                              child: Padding(
-                                padding: EdgeInsets.all(8.0),
-                              ),
-                            ),
-                          ),
-                        );
-                      },
-                    ),
-                  ),
-                ],
-              ),
+              child: const FeaturedProducts(),
             ),
           ),
 
