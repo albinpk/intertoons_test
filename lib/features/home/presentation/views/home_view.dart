@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-import '../../repositories/home_repository.dart';
 import '../cubit/home_view_cubit.dart';
 import '../widgets/additional_banners_list.dart';
 import '../widgets/best_sellers_list.dart';
@@ -24,12 +23,6 @@ class _HomeViewState extends State<HomeView>
 
     final screenSize = MediaQuery.of(context).size;
 
-    return BlocProvider<HomeViewCubit>(
-      create: (context) => HomeViewCubit(
-        homeRepository: context.read<HomeRepository>(),
-      ),
-      child: Builder(
-        builder: (context) {
           return SafeArea(
             child: RefreshIndicator(
               onRefresh: () async {
@@ -77,9 +70,6 @@ class _HomeViewState extends State<HomeView>
                   const BestSellersList(),
                 ],
               ),
-            ),
-          );
-        },
       ),
     );
   }
