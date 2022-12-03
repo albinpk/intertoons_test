@@ -64,6 +64,19 @@ class _ListItem extends StatelessWidget {
 
   final FeaturedProduct? featuredProduct;
 
+  static final _loading = ClipRRect(
+    borderRadius: BorderRadius.circular(8),
+    child: const ColoredBox(
+      color: Colors.black12,
+      child: Center(
+        child: CircularProgressIndicator(
+          color: Colors.grey,
+          strokeWidth: 2,
+        ),
+      ),
+    ),
+  );
+
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -71,18 +84,7 @@ class _ListItem extends StatelessWidget {
       child: AspectRatio(
         aspectRatio: 3 / 2,
         child: featuredProduct == null
-            ? ClipRRect(
-                borderRadius: BorderRadius.circular(8),
-                child: const ColoredBox(
-                  color: Colors.black12,
-                  child: Center(
-                    child: CircularProgressIndicator(
-                      color: Colors.grey,
-                      strokeWidth: 2,
-                    ),
-                  ),
-                ),
-              )
+            ? _loading
             : Card(
                 shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(8),
@@ -92,6 +94,7 @@ class _ListItem extends StatelessWidget {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.stretch,
                   children: [
+                    // Product image
                     Expanded(
                       child: FadeInImage.memoryNetwork(
                         placeholder: kTransparentImage,
@@ -99,11 +102,14 @@ class _ListItem extends StatelessWidget {
                         image: featuredProduct!.imageUrl,
                       ),
                     ),
+
+                    // Product details
                     Padding(
                       padding: const EdgeInsets.all(8),
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
+                          // Product name
                           Text(
                             featuredProduct!.name,
                             style: Theme.of(context)
@@ -114,8 +120,11 @@ class _ListItem extends StatelessWidget {
                                 ),
                             maxLines: 1,
                           ),
+
+                          // Product price
                           Row(
                             children: [
+                              // Special price
                               Text(
                                 '\$${featuredProduct!.specialPrice}',
                                 style: Theme.of(context)
@@ -127,6 +136,8 @@ class _ListItem extends StatelessWidget {
                                     ),
                               ),
                               const SizedBox(width: 10),
+
+                              // Actual price
                               Text(
                                 '\$${featuredProduct!.price}',
                                 style: Theme.of(context)
