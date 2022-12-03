@@ -91,7 +91,7 @@ class CategoryChild extends Equatable {
     return CategoryChild(
       id: map[_kId] as int,
       name: map[_kName] as String,
-      status: map[_kStatus] as bool,
+      status: (map[_kStatus] as String) == '1' ? true : false,
       imageUrl: map[_kImageUrl] as String,
     );
   }
