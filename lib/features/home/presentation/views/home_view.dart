@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../repositories/home_repository.dart';
 import '../cubit/home_view_cubit.dart';
+import '../widgets/additional_banners_list.dart';
 import '../widgets/best_sellers_list.dart';
 import '../widgets/featured_products_list.dart';
 import '../widgets/home_app_bar.dart';
@@ -50,16 +51,7 @@ class HomeView extends StatelessWidget {
                   ),
 
                   // Additional banners
-                  SliverToBoxAdapter(
-                    child: SizedBox(
-                      width: screenSize.width,
-                      height: 150,
-                      child: const Padding(
-                        padding: EdgeInsets.all(8.0),
-                        child: ColoredBox(color: Colors.red),
-                      ),
-                    ),
-                  ),
+                  const AdditionalBannersList(),
 
                   // Best seller products
                   const SliverToBoxAdapter(
