@@ -109,11 +109,13 @@ class _ListItem extends StatelessWidget {
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          // Product name
+                          // Is veg, product name, variations count
                           Row(
                             children: [
                               _VegSymbol(isVeg: featuredProduct!.isVeg),
                               const SizedBox(width: 8),
+
+                              // Product name
                               Expanded(
                                 child: Text(
                                   featuredProduct!.name,
@@ -127,6 +129,13 @@ class _ListItem extends StatelessWidget {
                                   maxLines: 1,
                                 ),
                               ),
+
+                              // Product variations count
+                              if (featuredProduct!.variations.isNotEmpty)
+                                Text(
+                                  '+${featuredProduct!.variations.length}',
+                                  style: const TextStyle(color: Colors.green),
+                                ),
                             ],
                           ),
                           const SizedBox(height: 5),
