@@ -110,16 +110,23 @@ class _ListItem extends StatelessWidget {
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           // Product name
-                          Text(
-                            featuredProduct!.name,
-                            style: Theme.of(context)
-                                .textTheme
-                                .titleMedium!
-                                .copyWith(
-                                  fontWeight: FontWeight.w600,
-                                ),
-                            maxLines: 1,
+                          Row(
+                            children: [
+                              _VegSymbol(isVeg: featuredProduct!.isVeg),
+                              const SizedBox(width: 8),
+                              Text(
+                                featuredProduct!.name,
+                                style: Theme.of(context)
+                                    .textTheme
+                                    .titleMedium!
+                                    .copyWith(
+                                      fontWeight: FontWeight.w600,
+                                    ),
+                                maxLines: 1,
+                              ),
+                            ],
                           ),
+                          const SizedBox(height: 5),
 
                           // Product price
                           Row(
@@ -156,6 +163,39 @@ class _ListItem extends StatelessWidget {
                   ],
                 ),
               ),
+      ),
+    );
+  }
+}
+
+class _VegSymbol extends StatelessWidget {
+  const _VegSymbol({
+    Key? key,
+    required bool isVeg,
+  })  : color = isVeg ? Colors.green : const Color(0xFFE9665C),
+        super(key: key);
+
+  final Color color;
+
+  @override
+  Widget build(BuildContext context) {
+    return SizedBox.square(
+      dimension: 16,
+      child: DecoratedBox(
+        decoration: BoxDecoration(
+          border: Border.all(
+            color: color,
+            width: 1.5,
+          ),
+        ),
+        child: Center(
+          child: SizedBox.square(
+            dimension: 8,
+            child: ClipOval(
+              child: ColoredBox(color: color),
+            ),
+          ),
+        ),
       ),
     );
   }
