@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:intertoons_test/core/constants.dart';
 
+import '../../../menu/presentation/cubit/menu_view_cubit.dart';
 import '../cubit/home_view_cubit.dart';
 import '../widgets/additional_banners_list.dart';
 import '../widgets/best_sellers_list.dart';
@@ -30,6 +31,7 @@ class _HomeViewState extends State<HomeView>
         color: primaryColor,
         onRefresh: () async {
           context.read<HomeViewCubit>().refresh();
+          context.read<MenuViewCubit>().refresh();
         },
         child: CustomScrollView(
           slivers: [
