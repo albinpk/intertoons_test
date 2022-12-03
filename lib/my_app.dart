@@ -4,6 +4,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'core/constants.dart';
 import 'features/home/presentation/views/home_view.dart';
 import 'features/home/repositories/home_repository.dart';
+import 'features/menu/presentation/views/menu_view.dart';
 
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
@@ -33,11 +34,7 @@ class _HomePageState extends State<_HomePage> {
   /// Bottom navigation items.
   static const Set<_NavItem> _items = {
     _NavItem(label: 'Home', iconData: Icons.home, view: HomeView()),
-    _NavItem(
-      label: 'Menu',
-      iconData: Icons.menu,
-      view: Center(child: Text('MenuView')),
-    ),
+    _NavItem(label: 'Menu', iconData: Icons.menu, view: MenuView()),
   };
 
   /// Currently select tab index.
