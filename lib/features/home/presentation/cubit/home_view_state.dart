@@ -1,4 +1,3 @@
-// ignore_for_file: public_member_api_docs, sort_constructors_first
 part of 'home_view_cubit.dart';
 
 /// Home view status.
@@ -11,6 +10,7 @@ class HomeViewState {
     this.sliderBanners = const [],
     this.featuredProducts = const [],
     this.additionalBanners = const [],
+    this.bestSellerProducts = const [],
   });
 
   /// HomeView status
@@ -25,17 +25,22 @@ class HomeViewState {
   /// List of additional [SliderBanner]s.
   final List<SliderBanner> additionalBanners;
 
+  /// List of [BestSellerProduct]s.
+  final List<BestSellerProduct> bestSellerProducts;
+
   HomeViewState copyWith({
     HomeViewStatus? status,
     List<SliderBanner>? sliderBanners,
     List<FeaturedProduct>? featuredProducts,
     List<SliderBanner>? additionalBanners,
+    List<BestSellerProduct>? bestSellerProducts,
   }) {
     return HomeViewState(
       status: status ?? this.status,
       sliderBanners: sliderBanners ?? this.sliderBanners,
       featuredProducts: featuredProducts ?? this.featuredProducts,
       additionalBanners: additionalBanners ?? this.additionalBanners,
+      bestSellerProducts: bestSellerProducts ?? this.bestSellerProducts,
     );
   }
 }
