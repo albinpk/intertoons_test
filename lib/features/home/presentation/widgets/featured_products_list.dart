@@ -151,9 +151,8 @@ class _ListItem extends StatelessWidget {
                               // Add button
                               TextButton(
                                 style: TextButton.styleFrom(
-                                  foregroundColor: Colors.green,
-                                  backgroundColor:
-                                      Colors.green.withOpacity(0.15),
+                                  foregroundColor: Colors.white,
+                                  backgroundColor: primaryColor,
                                   minimumSize: const Size(50, 25),
                                   tapTargetSize:
                                       MaterialTapTargetSize.shrinkWrap,
