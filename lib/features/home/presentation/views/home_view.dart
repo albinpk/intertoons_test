@@ -9,11 +9,19 @@ import '../widgets/featured_products_list.dart';
 import '../widgets/home_app_bar.dart';
 import '../widgets/slider_banner_list_view.dart';
 
-class HomeView extends StatelessWidget {
+class HomeView extends StatefulWidget {
   const HomeView({super.key});
 
   @override
+  State<HomeView> createState() => _HomeViewState();
+}
+
+class _HomeViewState extends State<HomeView>
+    with AutomaticKeepAliveClientMixin<HomeView> {
+  @override
   Widget build(BuildContext context) {
+    super.build(context);
+
     final screenSize = MediaQuery.of(context).size;
 
     return BlocProvider<HomeViewCubit>(
@@ -75,4 +83,7 @@ class HomeView extends StatelessWidget {
       ),
     );
   }
+
+  @override
+  bool get wantKeepAlive => true;
 }

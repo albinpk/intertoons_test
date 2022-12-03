@@ -27,6 +27,8 @@ class _HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<_HomePage> {
+  final _pageController = PageController();
+
   /// Bottom navigation items.
   static const Set<_NavItem> _items = {
     _NavItem(label: 'Home', view: HomeView()),
@@ -37,14 +39,27 @@ class _HomePageState extends State<_HomePage> {
   int _currentIndex = 0;
 
   @override
+  void dispose() {
+    _pageController.dispose();
+    super.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: _items.elementAt(_currentIndex).view,
+      // Using PageView to avoid creating all widgets at the start.
+      // And preserving state on each page by using the AutomaticKeepAliveClientMixin.
+      body: PageView(
+        controller: _pageController,
+        physics: const NeverScrollableScrollPhysics(),
+        children: _items.map((e) => e.view).toList(),
+      ),
+
       bottomNavigationBar: BottomNavigationBar(
         unselectedLabelStyle: Theme.of(context).textTheme.titleMedium,
         currentIndex: _currentIndex,
         selectedLabelStyle: Theme.of(context).textTheme.titleMedium,
-        onTap: (i) => setState(() => _currentIndex = i),
+        onTap: _onPageChange,
         items: _items
             .map(
               (e) => BottomNavigationBarItem(
@@ -54,6 +69,17 @@ class _HomePageState extends State<_HomePage> {
             )
             .toList(),
       ),
+    );
+  }
+
+  void _onPageChange(int i) {
+    // Calling setState to update bottom navigation bar
+    setState(() => _currentIndex = i);
+    // Change page
+    _pageController.animateToPage(
+      i,
+      duration: const Duration(milliseconds: 100),
+      curve: Curves.easeInOutCubic,
     );
   }
 }
