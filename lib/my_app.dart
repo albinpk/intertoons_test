@@ -2,9 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import 'core/constants.dart';
+import 'features/account/presentation/views/account_view.dart';
 import 'features/home/presentation/views/home_view.dart';
 import 'features/home/repositories/home_repository.dart';
 import 'features/menu/presentation/views/menu_view.dart';
+import 'features/search/presentation/views/search_view.dart';
 
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
@@ -35,6 +37,8 @@ class _HomePageState extends State<_HomePage> {
   static const Set<_NavItem> _items = {
     _NavItem(label: 'Home', iconData: Icons.home, view: HomeView()),
     _NavItem(label: 'Menu', iconData: Icons.menu, view: MenuView()),
+    _NavItem(label: 'Search', iconData: Icons.search, view: SearchView()),
+    _NavItem(label: 'Account', iconData: Icons.person, view: AccountView()),
   };
 
   /// Currently select tab index.
@@ -60,7 +64,9 @@ class _HomePageState extends State<_HomePage> {
       bottomNavigationBar: BottomNavigationBar(
         currentIndex: _currentIndex,
         selectedItemColor: primaryColor,
+        unselectedFontSize: 14,
         onTap: _onPageChange,
+        type: BottomNavigationBarType.fixed,
         items: _items
             .map(
               (e) => BottomNavigationBarItem(
