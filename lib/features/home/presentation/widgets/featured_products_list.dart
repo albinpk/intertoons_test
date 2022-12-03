@@ -114,15 +114,18 @@ class _ListItem extends StatelessWidget {
                             children: [
                               _VegSymbol(isVeg: featuredProduct!.isVeg),
                               const SizedBox(width: 8),
-                              Text(
-                                featuredProduct!.name,
-                                style: Theme.of(context)
-                                    .textTheme
-                                    .titleMedium!
-                                    .copyWith(
-                                      fontWeight: FontWeight.w600,
-                                    ),
-                                maxLines: 1,
+                              Expanded(
+                                child: Text(
+                                  featuredProduct!.name,
+                                  style: Theme.of(context)
+                                      .textTheme
+                                      .titleMedium!
+                                      .copyWith(
+                                        fontWeight: FontWeight.w600,
+                                      ),
+                                  overflow: TextOverflow.ellipsis,
+                                  maxLines: 1,
+                                ),
                               ),
                             ],
                           ),
