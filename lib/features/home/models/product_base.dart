@@ -1,10 +1,12 @@
+import 'package:equatable/equatable.dart';
+
 import 'featured_product.dart';
 import 'product_variation.dart';
 
 /// The product base class.
 ///
 /// This is the base class for the [FeaturedProduct] class.
-abstract class ProductBase {
+abstract class ProductBase extends Equatable {
   const ProductBase({
     required this.id,
     required this.name,
@@ -47,4 +49,20 @@ abstract class ProductBase {
 
   /// List of product variations.
   final List<ProductVariation> variations;
+
+  @override
+  List<Object> get props {
+    return [
+      id,
+      name,
+      sku,
+      categoryId,
+      categoryName,
+      isVeg,
+      description,
+      price,
+      imageUrl,
+      variations,
+    ];
+  }
 }

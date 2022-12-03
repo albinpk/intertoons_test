@@ -22,4 +22,11 @@ class BestSellerProduct extends ProductBase {
 
   /// Menu status.
   final bool menuStatus;
+
+  @override
+  List<Object> get props => [
+        ...super.props,
+        orderCount,
+        menuStatus,
+      ];
 }

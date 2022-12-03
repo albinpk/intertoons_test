@@ -1,5 +1,7 @@
+import 'package:equatable/equatable.dart';
+
 /// Product variation mode.
-class ProductVariation {
+class ProductVariation extends Equatable {
   const ProductVariation({
     required this.id,
     required this.title,
@@ -18,4 +20,7 @@ class ProductVariation {
 
   /// Product variation special price.
   final String specialPrice;
+
+  @override
+  List<Object> get props => [id, title, price, specialPrice];
 }

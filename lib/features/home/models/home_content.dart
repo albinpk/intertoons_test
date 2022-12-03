@@ -1,9 +1,11 @@
+import 'package:equatable/equatable.dart';
+
 import 'best_seller_product.dart';
 import 'featured_product.dart';
 import 'slider_banner.dart';
 
 /// Home contents model
-class HomeContent {
+class HomeContent extends Equatable {
   const HomeContent({
     required this.sliderBanners,
     required this.featuredProducts,
@@ -18,4 +20,8 @@ class HomeContent {
 
   /// List of [BestSellerProduct]s.
   final List<BestSellerProduct> bestSellerProducts;
+
+  @override
+  List<Object> get props =>
+      [sliderBanners, featuredProducts, bestSellerProducts];
 }

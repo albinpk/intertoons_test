@@ -32,4 +32,12 @@ class FeaturedProduct extends ProductBase {
   ///
   /// see [availableFrom].
   final TimeOfDay availableTo;
+
+  @override
+  List<Object> get props => [
+        ...super.props,
+        specialPrice,
+        availableFrom,
+        availableTo,
+      ];
 }

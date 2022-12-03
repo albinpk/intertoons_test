@@ -1,7 +1,9 @@
 import 'dart:convert';
 
+import 'package:equatable/equatable.dart';
+
 /// Slider banner model
-class SliderBanner {
+class SliderBanner extends Equatable {
   const SliderBanner({
     required this.id,
     required this.bannerOrder,
@@ -37,4 +39,7 @@ class SliderBanner {
 
   factory SliderBanner.fromJson(String source) =>
       SliderBanner.fromMap(json.decode(source) as Map<String, dynamic>);
+
+  @override
+  List<Object> get props => [id, bannerOrder, bannerImg];
 }
