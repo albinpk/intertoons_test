@@ -44,7 +44,7 @@ class HomeView extends StatelessWidget {
                   SliverToBoxAdapter(
                     child: SizedBox(
                       width: screenSize.width,
-                      height: 150,
+                      height: 230,
                       child: const FeaturedProductsList(),
                     ),
                   ),
