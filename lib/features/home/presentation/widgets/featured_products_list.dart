@@ -79,6 +79,8 @@ class _ListItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final textTheme = Theme.of(context).textTheme;
+
     return Padding(
       padding: const EdgeInsets.all(5),
       child: AspectRatio(
@@ -119,12 +121,9 @@ class _ListItem extends StatelessWidget {
                               Expanded(
                                 child: Text(
                                   featuredProduct!.name,
-                                  style: Theme.of(context)
-                                      .textTheme
-                                      .titleMedium!
-                                      .copyWith(
-                                        fontWeight: FontWeight.w600,
-                                      ),
+                                  style: textTheme.titleMedium!.copyWith(
+                                    fontWeight: FontWeight.w600,
+                                  ),
                                   overflow: TextOverflow.ellipsis,
                                   maxLines: 1,
                                 ),
@@ -146,26 +145,20 @@ class _ListItem extends StatelessWidget {
                               // Special price
                               Text(
                                 '\$${featuredProduct!.specialPrice}',
-                                style: Theme.of(context)
-                                    .textTheme
-                                    .titleMedium!
-                                    .copyWith(
-                                      fontWeight: FontWeight.bold,
-                                      color: Colors.red,
-                                    ),
+                                style: textTheme.titleMedium!.copyWith(
+                                  fontWeight: FontWeight.bold,
+                                  color: Colors.red,
+                                ),
                               ),
                               const SizedBox(width: 10),
 
                               // Actual price
                               Text(
                                 '\$${featuredProduct!.price}',
-                                style: Theme.of(context)
-                                    .textTheme
-                                    .titleSmall!
-                                    .copyWith(
-                                      color: Colors.grey,
-                                      decoration: TextDecoration.lineThrough,
-                                    ),
+                                style: textTheme.titleSmall!.copyWith(
+                                  color: Colors.grey,
+                                  decoration: TextDecoration.lineThrough,
+                                ),
                               ),
                               const Spacer(),
 
