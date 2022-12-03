@@ -27,8 +27,21 @@ class HomeViewCubit extends Cubit<HomeViewState> {
       emit(
         state.copyWith(
           status: HomeViewStatus.success,
-          sliderBanners: _getSliderBannersFromJson(json),
-          featuredProducts: _getFeaturedProductsFromJson(json),
+          sliderBanners: _getListItemFromJson(
+            json,
+            'slider_banners',
+            SliderBanner.fromMap,
+          ),
+          featuredProducts: _getListItemFromJson(
+            json,
+            'featured_products',
+            FeaturedProduct.fromMap,
+          ),
+          additionalBanners: _getListItemFromJson(
+            json,
+            'additional_banners',
+            SliderBanner.fromMap,
+          ),
         ),
       );
     } catch (err) {
@@ -40,31 +53,20 @@ class HomeViewCubit extends Cubit<HomeViewState> {
   /// Refetch home data.
   void refresh() => _getHomeData();
 
-  /// Extract and return list of [SliderBanner]s.
-  List<SliderBanner> _getSliderBannersFromJson(MapData json) {
+  /// Extract and return the list of [T] contained in the [key]
+  /// from the given [map] using the [converter] function.
+  List<T> _getListItemFromJson<T>(
+    MapData map,
+    String key,
+    T Function(MapData map) converter,
+  ) {
     try {
-      if (!(json['data'] as MapData).containsKey('slider_banners')) {
-        throw 'No banners';
+      if (!(map['data'] as MapData).containsKey(key)) {
+        throw 'No $key in the json';
       }
 
-      return (json['data']['slider_banners'] as List)
-          .map((e) => SliderBanner.fromMap(e))
-          .toList();
-    } catch (err) {
-      log(err.toString());
-      rethrow;
-    }
-  }
-
-  /// Extract and return list of [FeaturedProduct]s.
-  List<FeaturedProduct> _getFeaturedProductsFromJson(MapData json) {
-    try {
-      if (!(json['data'] as MapData).containsKey('featured_products')) {
-        throw 'No Featured products';
-      }
-
-      return (json['data']['featured_products'] as List)
-          .map((e) => FeaturedProduct.fromMap(e))
+      return (map['data'][key] as List)
+          .map<T>((e) => converter(e as MapData))
           .toList();
     } catch (err) {
       log(err.toString());
