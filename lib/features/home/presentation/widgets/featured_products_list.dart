@@ -142,24 +142,8 @@ class _ListItem extends StatelessWidget {
                           // Product price and ADD button
                           Row(
                             children: [
-                              // Special price
-                              Text(
-                                '\$${featuredProduct!.specialPrice}',
-                                style: textTheme.titleMedium!.copyWith(
-                                  fontWeight: FontWeight.bold,
-                                  color: Colors.red,
-                                ),
-                              ),
-                              const SizedBox(width: 10),
-
-                              // Actual price
-                              Text(
-                                '\$${featuredProduct!.price}',
-                                style: textTheme.titleSmall!.copyWith(
-                                  color: Colors.grey,
-                                  decoration: TextDecoration.lineThrough,
-                                ),
-                              ),
+                              // Price section
+                              _buildPriceSection(textTheme),
                               const Spacer(),
 
                               // Add button
@@ -185,6 +169,36 @@ class _ListItem extends StatelessWidget {
                 ),
               ),
       ),
+    );
+  }
+
+  /// Build price widget.
+  Widget _buildPriceSection(TextTheme textTheme) {
+    final mainStyle = textTheme.titleMedium!.copyWith(
+      fontWeight: FontWeight.bold,
+      color: Colors.red,
+    );
+
+    // Return the actual price if there is no discount.
+    if (!featuredProduct!.hasDiscount) {
+      return Text('\$${featuredProduct!.price}', style: mainStyle);
+    }
+
+    // If the product has a discount, display both the discounted and the actual price.
+    return Row(
+      children: [
+        Text('\$${featuredProduct!.specialPrice}', style: mainStyle),
+        const SizedBox(width: 10),
+
+        // Actual price
+        Text(
+          '\$${featuredProduct!.price}',
+          style: textTheme.titleSmall!.copyWith(
+            color: Colors.grey,
+            decoration: TextDecoration.lineThrough,
+          ),
+        ),
+      ],
     );
   }
 }

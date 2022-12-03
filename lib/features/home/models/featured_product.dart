@@ -36,6 +36,9 @@ class FeaturedProduct extends ProductBase {
   /// see [availableFrom].
   final TimeOfDay availableTo;
 
+  /// Return `true` if the product has a discount price.
+  bool get hasDiscount => specialPrice != 0;
+
   @override
   List<Object> get props => [
         ...super.props,
