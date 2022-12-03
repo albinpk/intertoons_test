@@ -31,8 +31,12 @@ class _HomePageState extends State<_HomePage> {
 
   /// Bottom navigation items.
   static const Set<_NavItem> _items = {
-    _NavItem(label: 'Home', view: HomeView()),
-    _NavItem(label: 'Menu', view: Center(child: Text('MenuView'))),
+    _NavItem(label: 'Home', iconData: Icons.home, view: HomeView()),
+    _NavItem(
+      label: 'Menu',
+      iconData: Icons.menu,
+      view: Center(child: Text('MenuView')),
+    ),
   };
 
   /// Currently select tab index.
@@ -56,14 +60,13 @@ class _HomePageState extends State<_HomePage> {
       ),
 
       bottomNavigationBar: BottomNavigationBar(
-        unselectedLabelStyle: Theme.of(context).textTheme.titleMedium,
         currentIndex: _currentIndex,
-        selectedLabelStyle: Theme.of(context).textTheme.titleMedium,
+        selectedItemColor: const Color(0xFFB90C00),
         onTap: _onPageChange,
         items: _items
             .map(
               (e) => BottomNavigationBarItem(
-                icon: const SizedBox.shrink(),
+                icon: Icon(e.iconData),
                 label: e.label,
               ),
             )
@@ -87,11 +90,15 @@ class _HomePageState extends State<_HomePage> {
 /// Just a model to group tab label and tab view.
 class _NavItem {
   const _NavItem({
+    required this.iconData,
     required this.label,
     required this.view,
   });
 
-  /// Tab label
+  /// Tab icon.
+  final IconData iconData;
+
+  /// Tab label.
   final String label;
 
   /// Tab view.
