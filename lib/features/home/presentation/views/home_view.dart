@@ -54,8 +54,17 @@ class HomeView extends StatelessWidget {
                   const AdditionalBannersList(),
 
                   // Best seller products
-                  const SliverToBoxAdapter(
-                    child: Text('Best sellers'),
+                  SliverToBoxAdapter(
+                    child: Padding(
+                      padding: const EdgeInsets.symmetric(
+                        horizontal: 10,
+                        vertical: 15,
+                      ),
+                      child: Text(
+                        'Best sellers',
+                        style: Theme.of(context).textTheme.titleLarge,
+                      ),
+                    ),
                   ),
                   const BestSellersList(),
                 ],
