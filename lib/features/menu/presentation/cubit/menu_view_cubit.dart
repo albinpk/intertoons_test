@@ -17,6 +17,9 @@ class MenuViewCubit extends Cubit<MenuViewState> {
 
   final MenuRepository _repository;
 
+  /// Refetch the menu data.
+  void refresh() => _getMenuData();
+
   Future<void> _getMenuData() async {
     emit(state.copyWith(status: MenuViewStatus.loading));
     try {
