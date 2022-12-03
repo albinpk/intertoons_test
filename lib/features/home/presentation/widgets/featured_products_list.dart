@@ -128,7 +128,7 @@ class _ListItem extends StatelessWidget {
                           ),
                           const SizedBox(height: 5),
 
-                          // Product price
+                          // Product price and ADD button
                           Row(
                             children: [
                               // Special price
@@ -154,6 +154,22 @@ class _ListItem extends StatelessWidget {
                                       color: Colors.grey,
                                       decoration: TextDecoration.lineThrough,
                                     ),
+                              ),
+                              const Spacer(),
+
+                              // Add button
+                              TextButton(
+                                style: TextButton.styleFrom(
+                                  foregroundColor: Colors.green,
+                                  backgroundColor:
+                                      Colors.green.withOpacity(0.15),
+                                  minimumSize: const Size(50, 25),
+                                  tapTargetSize:
+                                      MaterialTapTargetSize.shrinkWrap,
+                                  padding: EdgeInsets.zero,
+                                ),
+                                onPressed: () {},
+                                child: const Text('ADD'),
                               ),
                             ],
                           ),
