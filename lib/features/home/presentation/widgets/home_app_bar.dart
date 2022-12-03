@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+import '../../../../core/constants.dart';
+
 /// The home view appBar, contains delivery address.
 class HomeAppBar extends StatelessWidget {
   const HomeAppBar({super.key});
@@ -31,7 +33,7 @@ class HomeAppBar extends StatelessWidget {
             height: 5,
             child: ClipRRect(
               borderRadius: BorderRadius.circular(10),
-              child: const ColoredBox(color: Colors.red),
+              child: const ColoredBox(color: primaryColor),
             ),
           ),
         ],

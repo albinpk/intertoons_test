@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:transparent_image/transparent_image.dart';
 
+import '../../../../core/constants.dart';
 import '../../models/best_seller_product.dart';
 import '../cubit/home_view_cubit.dart';
 import 'veg_symbol.dart';
@@ -127,7 +128,7 @@ class _ListItem extends StatelessWidget {
                             TextButton(
                               onPressed: () {},
                               style: TextButton.styleFrom(
-                                backgroundColor: const Color(0xFFC91609),
+                                backgroundColor: primaryColor,
                                 foregroundColor: Colors.white,
                                 minimumSize: const Size(50, 25),
                                 padding: EdgeInsets.zero,
@@ -136,10 +137,12 @@ class _ListItem extends StatelessWidget {
                               child: const Text('ADD'),
                             ),
                             const SizedBox(width: 10),
+
+                            // Product price
                             Text(
                               '\$${product!.price}',
                               style: textTheme.titleSmall!.copyWith(
-                                color: Colors.red,
+                                color: primaryColor,
                                 fontWeight: FontWeight.bold,
                               ),
                             ),

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
+import 'core/constants.dart';
 import 'features/home/presentation/views/home_view.dart';
 import 'features/home/repositories/home_repository.dart';
 
@@ -61,7 +62,7 @@ class _HomePageState extends State<_HomePage> {
 
       bottomNavigationBar: BottomNavigationBar(
         currentIndex: _currentIndex,
-        selectedItemColor: const Color(0xFFB90C00),
+        selectedItemColor: primaryColor,
         onTap: _onPageChange,
         items: _items
             .map(
