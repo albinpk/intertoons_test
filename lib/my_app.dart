@@ -6,6 +6,7 @@ import 'features/account/presentation/views/account_view.dart';
 import 'features/home/presentation/views/home_view.dart';
 import 'features/home/repositories/home_repository.dart';
 import 'features/menu/presentation/views/menu_view.dart';
+import 'features/menu/repositories/menu_repository.dart';
 import 'features/search/presentation/views/search_view.dart';
 
 class MyApp extends StatelessWidget {
@@ -13,8 +14,11 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return RepositoryProvider(
-      create: (context) => HomeRepository(),
+    return MultiRepositoryProvider(
+      providers: [
+        RepositoryProvider(create: (context) => HomeRepository()),
+        RepositoryProvider(create: (context) => MenuRepository()),
+      ],
       child: const MaterialApp(
         title: 'Intertoons Test App',
         home: _HomePage(),
