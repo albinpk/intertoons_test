@@ -147,8 +147,16 @@ class _BodyState extends State<_Body> {
         }
       },
       child: TabBarView(
-        children:
-            widget.categories.map((e) => Center(child: Text(e.name))).toList(),
+        children: widget.categories
+            .map(
+              (category) => Center(
+                child: Text(
+                  category.name,
+                  style: Theme.of(context).textTheme.titleLarge,
+                ),
+              ),
+            )
+            .toList(),
       ),
     );
   }
