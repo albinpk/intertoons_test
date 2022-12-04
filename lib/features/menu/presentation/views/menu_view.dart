@@ -4,6 +4,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../../../navigation_cubit/navigation_cubit.dart';
 import '../../../../core/models/category_model.dart';
 import '../cubit/menu_view_cubit.dart';
+import '../widgets/tab_item.dart';
 
 class MenuView extends StatefulWidget {
   const MenuView({super.key});
@@ -43,7 +44,7 @@ class _MenuViewState extends State<MenuView>
                       isScrollable: true,
                       indicatorColor: Colors.white,
                       tabs: state.categories
-                          .map((e) => _Tab(category: e))
+                          .map((e) => TabItem(category: e))
                           .toList(),
                     ),
             ),
@@ -58,48 +59,6 @@ class _MenuViewState extends State<MenuView>
 
   @override
   bool get wantKeepAlive => true;
-}
-
-/// Tab with category image and name.
-class _Tab extends StatelessWidget {
-  const _Tab({
-    Key? key,
-    required this.category,
-  }) : super(key: key);
-
-  final Category category;
-
-  @override
-  Widget build(BuildContext context) {
-    return Tab(
-      child: Row(
-        children: [
-          // Category image.
-          Padding(
-            padding: const EdgeInsets.all(5).copyWith(right: 10),
-            child: ClipOval(
-              child: AspectRatio(
-                aspectRatio: 1,
-                child: ColoredBox(
-                  color: Colors.white,
-                  child: Padding(
-                    padding: const EdgeInsets.all(4),
-                    child: Image.network(
-                      category.imageUrl,
-                      fit: BoxFit.fitHeight,
-                    ),
-                  ),
-                ),
-              ),
-            ),
-          ),
-
-          // Category name.
-          Text(category.name),
-        ],
-      ),
-    );
-  }
 }
 
 class _Body extends StatefulWidget {
@@ -151,8 +110,8 @@ class _BodyState extends State<_Body> {
             .map(
               (category) => Center(
                 child: Text(
-                  category.name,
-                  style: Theme.of(context).textTheme.titleLarge,
+                    category.name,
+                    style: Theme.of(context).textTheme.titleLarge,
                 ),
               ),
             )
