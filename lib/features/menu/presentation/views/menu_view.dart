@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
+import '../../../../navigation_cubit/navigation_cubit.dart';
+import '../../models/category.dart';
 import '../cubit/menu_view_cubit.dart';
 
 class MenuView extends StatefulWidget {
@@ -46,11 +48,7 @@ class _MenuViewState extends State<MenuView>
             ),
             body: isLoading
                 ? const Center(child: CircularProgressIndicator())
-                : TabBarView(
-                    children: state.categories
-                        .map((e) => Center(child: Text(e.name)))
-                        .toList(),
-                  ),
+                : _Body(categories: state.categories),
           ),
         );
       },
@@ -59,4 +57,56 @@ class _MenuViewState extends State<MenuView>
 
   @override
   bool get wantKeepAlive => true;
+}
+
+class _Body extends StatefulWidget {
+  const _Body({
+    Key? key,
+    required this.categories,
+  }) : super(key: key);
+
+  final List<Category> categories;
+
+  @override
+  State<_Body> createState() => _BodyState();
+}
+
+class _BodyState extends State<_Body> {
+  @override
+  void didChangeDependencies() {
+    super.didChangeDependencies();
+
+    // This code is used to change the Tab when the user taps a "Category item"
+    // on the home page for the first time after the app launches.
+    // Later taps are handled by the BlocListener below.
+    final data = context.read<NavigationCubit>().state.data;
+    if (data is! Category) return;
+    final i = context.read<MenuViewCubit>().state.categories.indexOf(data);
+    assert(i != -1);
+    if (i != -1) DefaultTabController.of(context)!.animateTo(i);
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return BlocListener<NavigationCubit, NavigationState>(
+      listenWhen: (previous, current) {
+        return current.currentTab == 1 && current.data is Category;
+      },
+      listener: (context, state) {
+        final tabIndex = context
+            .read<MenuViewCubit>()
+            .state
+            .categories
+            .indexOf(state.data! as Category);
+        assert(tabIndex != -1);
+        if (tabIndex != -1) {
+          DefaultTabController.of(context)!.animateTo(tabIndex);
+        }
+      },
+      child: TabBarView(
+        children:
+            widget.categories.map((e) => Center(child: Text(e.name))).toList(),
+      ),
+    );
+  }
 }

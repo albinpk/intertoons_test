@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:transparent_image/transparent_image.dart';
 
+import '../../../../navigation_cubit/navigation_cubit.dart';
 import '../../../menu/models/category.dart';
 import '../../../menu/presentation/cubit/menu_view_cubit.dart';
 
@@ -127,7 +128,7 @@ class _ListItem extends StatelessWidget {
                     Material(
                       color: Colors.transparent,
                       child: InkWell(
-                        onTap: () {},
+                        onTap: () => _onTap(context),
                         highlightColor: Colors.grey.withOpacity(0.1),
                         splashColor: Colors.grey.withOpacity(0.1),
                       ),
@@ -137,5 +138,9 @@ class _ListItem extends StatelessWidget {
               ),
       ),
     );
+  }
+
+  void _onTap(BuildContext context) {
+    context.read<NavigationCubit>().changeTabWithData(1, data: category!);
   }
 }
