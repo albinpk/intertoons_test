@@ -74,42 +74,50 @@ class _HomePageState extends State<_HomePage> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      // Using PageView to avoid creating all widgets at the start.
-      // And preserving state on each page by using the AutomaticKeepAliveClientMixin.
-      body: PageView(
-        controller: _pageController,
-        physics: const NeverScrollableScrollPhysics(),
-        children: _items.map((e) => e.view).toList(),
-      ),
+    return BlocListener<NavigationCubit, NavigationState>(
+      listenWhen: (previous, current) {
+        return previous.currentTab != current.currentTab;
+      },
+      listener: _navigationBlocListener,
+      child: Scaffold(
+        // Using PageView to avoid creating all widgets at the start.
+        // And preserving state on each page by using the AutomaticKeepAliveClientMixin.
+        body: PageView(
+          controller: _pageController,
+          physics: const NeverScrollableScrollPhysics(),
+          children: _items.map((e) => e.view).toList(),
+        ),
 
-      bottomNavigationBar: BottomNavigationBar(
-        currentIndex: _currentIndex,
-        selectedItemColor: primaryColor,
-        unselectedFontSize: 14,
-        onTap: _onPageChange,
-        type: BottomNavigationBarType.fixed,
-        items: _items
-            .map(
-              (e) => BottomNavigationBarItem(
-                icon: Icon(e.iconData),
-                label: e.label,
-              ),
-            )
-            .toList(),
+        bottomNavigationBar: BottomNavigationBar(
+          currentIndex: _currentIndex,
+          selectedItemColor: primaryColor,
+          unselectedFontSize: 14,
+          onTap: (i) => context.read<NavigationCubit>().changeTab(i),
+          type: BottomNavigationBarType.fixed,
+          items: _items
+              .map(
+                (e) => BottomNavigationBarItem(
+                  icon: Icon(e.iconData),
+                  label: e.label,
+                ),
+              )
+              .toList(),
+        ),
       ),
     );
   }
 
-  void _onPageChange(int i) {
-    // Calling setState to update bottom navigation bar
-    setState(() => _currentIndex = i);
-    // Change page
-    _pageController.animateToPage(
-      i,
-      duration: const Duration(milliseconds: 100),
-      curve: Curves.easeInOutCubic,
-    );
+  void _navigationBlocListener(BuildContext context, NavigationState state) {
+    setState(() {
+      // Calling setState to update bottom navigation bar
+      _currentIndex = state.currentTab;
+      // Change page
+      _pageController.animateToPage(
+        state.currentTab,
+        duration: const Duration(milliseconds: 100),
+        curve: Curves.easeInOutCubic,
+      );
+    });
   }
 }
 
