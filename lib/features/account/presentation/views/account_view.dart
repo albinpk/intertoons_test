@@ -7,10 +7,14 @@ class AccountView extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        backgroundColor: Colors.black87,
         title: const Text('Account'),
       ),
-      body: const Center(
-        child: Text('Account'),
+      body: Center(
+        child: Text(
+          'Account',
+          style: Theme.of(context).textTheme.titleLarge,
+        ),
       ),
     );
   }

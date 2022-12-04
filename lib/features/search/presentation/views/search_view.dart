@@ -7,10 +7,14 @@ class SearchView extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        backgroundColor: Colors.black87,
         title: const Text('Search'),
       ),
-      body: const Center(
-        child: Text('Search'),
+      body: Center(
+        child: Text(
+          'Search',
+          style: Theme.of(context).textTheme.titleLarge,
+        ),
       ),
     );
   }
