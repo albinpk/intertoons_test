@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import 'core/constants.dart';
+import 'core/widgets/bottom_cart_bar.dart';
 import 'features/account/presentation/views/account_view.dart';
 import 'features/home/presentation/cubit/home_view_cubit.dart';
 import 'features/home/presentation/views/home_view.dart';
@@ -88,20 +89,26 @@ class _HomePageState extends State<_HomePage> {
           children: _items.map((e) => e.view).toList(),
         ),
 
-        bottomNavigationBar: BottomNavigationBar(
-          currentIndex: _currentIndex,
-          selectedItemColor: primaryColor,
-          unselectedFontSize: 14,
-          onTap: (i) => context.read<NavigationCubit>().changeTab(i),
-          type: BottomNavigationBarType.fixed,
-          items: _items
-              .map(
-                (e) => BottomNavigationBarItem(
-                  icon: Icon(e.iconData),
-                  label: e.label,
-                ),
-              )
-              .toList(),
+        bottomNavigationBar: Column(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            const BottomCartBar(),
+            BottomNavigationBar(
+              currentIndex: _currentIndex,
+              selectedItemColor: primaryColor,
+              unselectedFontSize: 14,
+              onTap: (i) => context.read<NavigationCubit>().changeTab(i),
+              type: BottomNavigationBarType.fixed,
+              items: _items
+                  .map(
+                    (e) => BottomNavigationBarItem(
+                      icon: Icon(e.iconData),
+                      label: e.label,
+                    ),
+                  )
+                  .toList(),
+            ),
+          ],
         ),
       ),
     );
