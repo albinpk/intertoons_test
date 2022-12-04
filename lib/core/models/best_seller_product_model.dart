@@ -53,7 +53,7 @@ class BestSellerProduct extends ProductBase {
       id: map[_kId] as int,
       name: map[_kName] as String,
       sku: map[_kSku] as String,
-      categoryId: map[_kCategoryId] as String,
+      categoryId: int.parse(map[_kCategoryId] as String),
       categoryName: map[_kCategoryName] as String,
       isVeg: (map[_kIsVeg] as String) == "1" ? true : false,
       description: map[_kDescription] as String,

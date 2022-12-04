@@ -30,7 +30,7 @@ abstract class ProductBase extends Equatable {
   final String sku;
 
   /// Product category id.
-  final String categoryId;
+  final int categoryId;
 
   /// Product category name.
   final String categoryName;
