@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import 'core/constants.dart';
+import 'core/cubit/cart_cubit.dart';
 import 'core/cubit/navigation_cubit.dart';
 import 'core/widgets/bottom_cart_bar.dart';
 import 'features/account/presentation/views/account_view.dart';
@@ -26,6 +27,7 @@ class MyApp extends StatelessWidget {
       child: MultiBlocProvider(
         providers: [
           BlocProvider(create: (context) => NavigationCubit()),
+          BlocProvider(create: (context) => CartCubit()),
           BlocProvider(
             create: (context) => HomeViewCubit(
               homeRepository: context.read<HomeRepository>(),
