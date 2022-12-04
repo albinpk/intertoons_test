@@ -2,7 +2,7 @@ import 'dart:developer';
 
 import 'package:equatable/equatable.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:intertoons_test/features/menu/models/category.dart';
+import 'package:intertoons_test/core/models/category_model.dart';
 
 import '../../repositories/menu_repository.dart';
 

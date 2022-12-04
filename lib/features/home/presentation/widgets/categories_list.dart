@@ -3,7 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:transparent_image/transparent_image.dart';
 
 import '../../../../navigation_cubit/navigation_cubit.dart';
-import '../../../menu/models/category.dart';
+import '../../../../core/models/category_model.dart';
 import '../../../menu/presentation/cubit/menu_view_cubit.dart';
 
 class CategoriesList extends StatelessWidget {

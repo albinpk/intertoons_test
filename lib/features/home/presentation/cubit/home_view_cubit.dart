@@ -4,8 +4,8 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../../core/types.dart';
-import '../../models/best_seller_product.dart';
-import '../../models/featured_product.dart';
+import '../../../../core/models/best_seller_product_model.dart';
+import '../../../../core/models/featured_product_model.dart';
 import '../../models/slider_banner.dart';
 import '../../repositories/home_repository.dart';
 

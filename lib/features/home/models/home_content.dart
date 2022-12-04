@@ -1,7 +1,7 @@
 import 'package:equatable/equatable.dart';
 
-import 'best_seller_product.dart';
-import 'featured_product.dart';
+import '../../../core/models/best_seller_product_model.dart';
+import '../../../core/models/featured_product_model.dart';
 import 'slider_banner.dart';
 
 /// Home contents model

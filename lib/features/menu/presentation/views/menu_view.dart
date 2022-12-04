@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../../navigation_cubit/navigation_cubit.dart';
-import '../../models/category.dart';
+import '../../../../core/models/category_model.dart';
 import '../cubit/menu_view_cubit.dart';
 
 class MenuView extends StatefulWidget {

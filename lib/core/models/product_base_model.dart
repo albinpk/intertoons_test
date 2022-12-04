@@ -1,7 +1,7 @@
 import 'package:equatable/equatable.dart';
 
-import 'featured_product.dart';
-import 'product_variation.dart';
+import 'featured_product_model.dart';
+import 'product_variation_model.dart';
 
 /// The product base class.
 ///

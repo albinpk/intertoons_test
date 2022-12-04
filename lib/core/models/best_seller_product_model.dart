@@ -1,7 +1,7 @@
 import 'dart:convert';
 
-import 'product_base.dart';
-import 'product_variation.dart';
+import 'product_base_model.dart';
+import 'product_variation_model.dart';
 
 /// Best seller product model.
 class BestSellerProduct extends ProductBase {

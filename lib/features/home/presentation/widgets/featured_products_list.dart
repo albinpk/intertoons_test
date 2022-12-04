@@ -3,7 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:transparent_image/transparent_image.dart';
 
 import '../../../../core/constants.dart';
-import '../../models/featured_product.dart';
+import '../../../../core/models/featured_product_model.dart';
 import '../cubit/home_view_cubit.dart';
 import 'veg_symbol.dart';
 

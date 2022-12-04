@@ -1,9 +1,9 @@
 import 'dart:convert';
 
 import 'package:flutter/material.dart';
-import 'product_variation.dart';
+import 'product_variation_model.dart';
 
-import 'product_base.dart';
+import 'product_base_model.dart';
 
 /// Featured product model.
 class FeaturedProduct extends ProductBase {
