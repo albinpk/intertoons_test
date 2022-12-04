@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-import '../../../../navigation_cubit/navigation_cubit.dart';
 import '../../../../core/models/category_model.dart';
+import '../../../../navigation_cubit/navigation_cubit.dart';
 import '../cubit/menu_view_cubit.dart';
+import '../widgets/menu_tab_bar_view.dart';
 import '../widgets/tab_item.dart';
 
 class MenuView extends StatefulWidget {
@@ -107,14 +108,7 @@ class _BodyState extends State<_Body> {
       },
       child: TabBarView(
         children: widget.categories
-            .map(
-              (category) => Center(
-                child: Text(
-                    category.name,
-                    style: Theme.of(context).textTheme.titleLarge,
-                ),
-              ),
-            )
+            .map((category) => MenuTabBarView(category: category))
             .toList(),
       ),
     );
