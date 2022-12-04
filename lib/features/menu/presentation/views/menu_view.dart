@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
+import '../../../../core/cubit/navigation_cubit.dart';
 import '../../../../core/models/category_model.dart';
-import '../../../../navigation_cubit/navigation_cubit.dart';
 import '../cubit/menu_view_cubit.dart';
 import '../widgets/menu_tab_bar_view.dart';
 import '../widgets/tab_item.dart';

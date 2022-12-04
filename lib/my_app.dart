@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import 'core/constants.dart';
+import 'core/cubit/navigation_cubit.dart';
 import 'core/widgets/bottom_cart_bar.dart';
 import 'features/account/presentation/views/account_view.dart';
 import 'features/home/presentation/cubit/home_view_cubit.dart';
@@ -11,7 +12,6 @@ import 'features/menu/presentation/cubit/menu_view_cubit.dart';
 import 'features/menu/presentation/views/menu_view.dart';
 import 'features/menu/repositories/menu_repository.dart';
 import 'features/search/presentation/views/search_view.dart';
-import 'navigation_cubit/navigation_cubit.dart';
 
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
