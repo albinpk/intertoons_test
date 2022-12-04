@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'dart:developer';
 
 import 'package:equatable/equatable.dart';
 import 'package:hydrated_bloc/hydrated_bloc.dart';
@@ -15,4 +16,15 @@ class CartCubit extends HydratedCubit<CartState> {
 
   @override
   Map<String, dynamic> toJson(CartState state) => state.toMap();
+
+  @override
+  void onError(Object error, StackTrace stackTrace) {
+    log(
+      'An error has occurred.',
+      name: 'CartCubit',
+      error: error,
+      stackTrace: stackTrace,
+    );
+    super.onError(error, stackTrace);
+  }
 }
