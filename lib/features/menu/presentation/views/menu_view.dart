@@ -41,8 +41,9 @@ class _MenuViewState extends State<MenuView>
                   ? null
                   : TabBar(
                       isScrollable: true,
+                      indicatorColor: Colors.white,
                       tabs: state.categories
-                          .map((e) => Tab(child: Text(e.name)))
+                          .map((e) => _Tab(category: e))
                           .toList(),
                     ),
             ),
@@ -57,6 +58,48 @@ class _MenuViewState extends State<MenuView>
 
   @override
   bool get wantKeepAlive => true;
+}
+
+/// Tab with category image and name.
+class _Tab extends StatelessWidget {
+  const _Tab({
+    Key? key,
+    required this.category,
+  }) : super(key: key);
+
+  final Category category;
+
+  @override
+  Widget build(BuildContext context) {
+    return Tab(
+      child: Row(
+        children: [
+          // Category image.
+          Padding(
+            padding: const EdgeInsets.all(5).copyWith(right: 10),
+            child: ClipOval(
+              child: AspectRatio(
+                aspectRatio: 1,
+                child: ColoredBox(
+                  color: Colors.white,
+                  child: Padding(
+                    padding: const EdgeInsets.all(4),
+                    child: Image.network(
+                      category.imageUrl,
+                      fit: BoxFit.fitHeight,
+                    ),
+                  ),
+                ),
+              ),
+            ),
+          ),
+
+          // Category name.
+          Text(category.name),
+        ],
+      ),
+    );
+  }
 }
 
 class _Body extends StatefulWidget {
