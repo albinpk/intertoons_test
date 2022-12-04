@@ -7,6 +7,9 @@ class BottomCartBar extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final textTheme = Theme.of(context).textTheme;
+    const itemCount = 2;
+
     return ColoredBox(
       color: Colors.black,
       child: Padding(
@@ -14,12 +17,44 @@ class BottomCartBar extends StatelessWidget {
         child: Row(
           children: [
             Expanded(
-              child: Text(
-                '2 Items in cart \$50.0',
-                style: Theme.of(context)
-                    .textTheme
-                    .titleMedium!
-                    .copyWith(color: Colors.white),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  RichText(
+                    text: TextSpan(
+                      style: textTheme.titleSmall!.copyWith(
+                        color: Colors.white,
+                        fontWeight: FontWeight.w400,
+                      ),
+                      children: const [
+                        TextSpan(
+                          text: '$itemCount ',
+                          style: TextStyle(fontWeight: FontWeight.bold),
+                        ),
+                        TextSpan(
+                          text: 'item${itemCount > 1 ? 's' : ''} in the cart',
+                        )
+                      ],
+                    ),
+                  ),
+                  const SizedBox(height: 3),
+
+                  // Total amount
+                  RichText(
+                    text: TextSpan(
+                      style: textTheme.titleMedium!.copyWith(
+                        color: Colors.white,
+                      ),
+                      children: const [
+                        TextSpan(text: 'Total: '),
+                        TextSpan(
+                          text: '\$50.0',
+                          style: TextStyle(fontWeight: FontWeight.bold),
+                        ),
+                      ],
+                    ),
+                  ),
+                ],
               ),
             ),
 
