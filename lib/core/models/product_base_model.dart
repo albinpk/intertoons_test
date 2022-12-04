@@ -51,7 +51,7 @@ abstract class ProductBase extends Equatable {
   final List<ProductVariation> variations;
 
   @override
-  List<Object> get props {
+  List<Object?> get props {
     return [
       id,
       name,

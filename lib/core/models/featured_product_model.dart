@@ -29,18 +29,18 @@ class FeaturedProduct extends ProductBase {
   /// The time this featured product starts selling.
   ///
   /// see [availableTo].
-  final TimeOfDay availableFrom;
+  final TimeOfDay? availableFrom;
 
   /// The time this featured product stops selling.
   ///
   /// see [availableFrom].
-  final TimeOfDay availableTo;
+  final TimeOfDay? availableTo;
 
   /// Return `true` if the product has a discount price.
   bool get hasDiscount => specialPrice != 0;
 
   @override
-  List<Object> get props => [
+  List<Object?> get props => [
         ...super.props,
         specialPrice,
         availableFrom,
@@ -52,13 +52,20 @@ class FeaturedProduct extends ProductBase {
       _kId: id,
       _kName: name,
       _kSku: sku,
-      _kCategoryId: categoryId,
+      _kCategoryId: '$categoryId',
       _kCategoryName: categoryName,
-      _kIsVeg: isVeg,
+      _kIsVeg: isVeg ? '1' : '2',
       _kDescription: description,
-      _kPrice: price,
+      _kPrice: '$price',
       _kImageUrl: imageUrl,
       _kVariations: variations.map((x) => x.toMap()).toList(),
+      _kSpecialPrice: '$specialPrice',
+      _kAvailableFrom: availableFrom == null
+          ? null
+          : '${availableFrom!.hour}:${availableFrom!.minute}',
+      _kAvailableTo: availableTo == null
+          ? null
+          : '${availableTo!.hour}:${availableTo!.minute}',
     };
   }
 
@@ -78,9 +85,11 @@ class FeaturedProduct extends ProductBase {
           (x) => ProductVariation.fromMap(x),
         ),
       ),
-      specialPrice: map[_kSpecialPrice] is int
-          ? map[_kSpecialPrice].toDouble()
-          : double.parse(map[_kSpecialPrice]),
+      specialPrice: map[_kSpecialPrice] == null
+          ? 0
+          : map[_kSpecialPrice] is int
+              ? map[_kSpecialPrice].toDouble()
+              : double.parse(map[_kSpecialPrice]),
       availableFrom: TimeOfDay(
         hour: int.parse((map[_kAvailableFrom] as String).split(':')[0]),
         minute: int.parse((map[_kAvailableFrom] as String).split(':')[1]),
@@ -109,5 +118,5 @@ class FeaturedProduct extends ProductBase {
   static const _kVariations = 'variations';
   static const _kSpecialPrice = 'special_price';
   static const _kAvailableFrom = 'available_from';
-  static const _kAvailableTo = 'available_from';
+  static const _kAvailableTo = 'available_to';
 }

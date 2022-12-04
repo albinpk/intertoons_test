@@ -28,7 +28,7 @@ class CartState extends Equatable {
   factory CartState.fromMap(Map<String, dynamic> map) {
     return CartState(
       items: List<FeaturedProduct>.from(
-        (map['items'] as List<int>).map<FeaturedProduct>(
+        (map['items'] as List).map<FeaturedProduct>(
           (x) => FeaturedProduct.fromMap(x as Map<String, dynamic>),
         ),
       ),

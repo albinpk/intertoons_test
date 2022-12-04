@@ -27,7 +27,7 @@ class BestSellerProduct extends ProductBase {
   final bool menuStatus;
 
   @override
-  List<Object> get props => [
+  List<Object?> get props => [
         ...super.props,
         orderCount,
         menuStatus,
@@ -45,6 +45,8 @@ class BestSellerProduct extends ProductBase {
       _kPrice: price,
       _kImageUrl: imageUrl,
       _kVariations: variations.map((x) => x.toMap()).toList(),
+      _kOrderCount: orderCount,
+      _kMenuStatus: menuStatus,
     };
   }
 
