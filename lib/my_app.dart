@@ -10,6 +10,7 @@ import 'features/menu/presentation/cubit/menu_view_cubit.dart';
 import 'features/menu/presentation/views/menu_view.dart';
 import 'features/menu/repositories/menu_repository.dart';
 import 'features/search/presentation/views/search_view.dart';
+import 'navigation_cubit/navigation_cubit.dart';
 
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
@@ -23,6 +24,7 @@ class MyApp extends StatelessWidget {
       ],
       child: MultiBlocProvider(
         providers: [
+          BlocProvider(create: (context) => NavigationCubit()),
           BlocProvider(
             create: (context) => HomeViewCubit(
               homeRepository: context.read<HomeRepository>(),
