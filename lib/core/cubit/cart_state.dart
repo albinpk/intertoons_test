@@ -6,13 +6,13 @@ class CartState extends Equatable {
   });
 
   /// Items in cart.
-  final List<FeaturedProduct> items;
+  final List<CartItem> items;
 
   @override
   List<Object> get props => [items];
 
   CartState copyWith({
-    List<FeaturedProduct>? items,
+    List<CartItem>? items,
   }) {
     return CartState(
       items: items ?? this.items,
@@ -27,9 +27,9 @@ class CartState extends Equatable {
 
   factory CartState.fromMap(Map<String, dynamic> map) {
     return CartState(
-      items: List<FeaturedProduct>.from(
-        (map['items'] as List).map<FeaturedProduct>(
-          (x) => FeaturedProduct.fromMap(x as Map<String, dynamic>),
+      items: List<CartItem>.from(
+        (map['items'] as List).map<CartItem>(
+          (x) => CartItem.fromMap(x as Map<String, dynamic>),
         ),
       ),
     );
