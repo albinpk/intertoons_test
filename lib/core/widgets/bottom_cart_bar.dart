@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+
+import '../cubit/cart_cubit.dart';
 
 /// This widget displays the number of items in the user's cart,
 /// the total amount, and a button to view the cart.
@@ -8,7 +11,6 @@ class BottomCartBar extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final textTheme = Theme.of(context).textTheme;
-    const itemCount = 2;
 
     return ColoredBox(
       color: Colors.black,
@@ -20,22 +22,29 @@ class BottomCartBar extends StatelessWidget {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  RichText(
-                    text: TextSpan(
-                      style: textTheme.titleSmall!.copyWith(
-                        color: Colors.white,
-                        fontWeight: FontWeight.w400,
-                      ),
-                      children: const [
-                        TextSpan(
-                          text: '$itemCount ',
-                          style: TextStyle(fontWeight: FontWeight.bold),
+                  BlocSelector<CartCubit, CartState, int>(
+                    selector: (state) => state.items.length,
+                    builder: (context, itemCount) {
+                      return RichText(
+                        text: TextSpan(
+                          style: textTheme.titleSmall!.copyWith(
+                            color: Colors.white,
+                            fontWeight: FontWeight.w400,
+                          ),
+                          children: [
+                            TextSpan(
+                              text: '$itemCount ',
+                              style:
+                                  const TextStyle(fontWeight: FontWeight.bold),
+                            ),
+                            TextSpan(
+                              text:
+                                  'item${itemCount > 1 ? 's' : ''} in the cart',
+                            )
+                          ],
                         ),
-                        TextSpan(
-                          text: 'item${itemCount > 1 ? 's' : ''} in the cart',
-                        )
-                      ],
-                    ),
+                      );
+                    },
                   ),
                   const SizedBox(height: 3),
 

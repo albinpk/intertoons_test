@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:transparent_image/transparent_image.dart';
 
 import '../../../../core/constants.dart';
+import '../../../../core/cubit/cart_cubit.dart';
 import '../../../../core/models/category_model.dart';
 import '../../../../core/models/featured_product_model.dart';
 import '../../../home/presentation/cubit/home_view_cubit.dart';
@@ -116,7 +117,9 @@ class _ListItem extends StatelessWidget {
                         tapTargetSize: MaterialTapTargetSize.shrinkWrap,
                         minimumSize: const Size(70, 20),
                       ),
-                      onPressed: () {},
+                      onPressed: () {
+                        context.read<CartCubit>().addToCart(product);
+                      },
                       child: const Text('ADD'),
                     ),
                   ],
