@@ -35,7 +35,9 @@ class CartCubit extends HydratedCubit<CartState> {
     );
   }
 
-  /// Remove a product to shopping cart.
+  /// Decrease given [product]s count by 1.
+  ///
+  /// Remove the [product] if its count is 1.
   void removeFromCart(ProductBase product) {
     final index = state.items.indexWhere((e) => e.productId == product.id);
     assert(index != -1);
@@ -45,6 +47,14 @@ class CartCubit extends HydratedCubit<CartState> {
       final updatedItem = item.copyWith(productCount: item.productCount - 1);
       items.insert(index, updatedItem);
     }
+    emit(state.copyWith(items: items));
+  }
+
+  /// Delete a product to shopping cart.
+  void deleteFromCart(ProductBase product) {
+    final index = state.items.indexWhere((e) => e.productId == product.id);
+    assert(index != -1);
+    final items = [...state.items]..removeAt(index);
     emit(state.copyWith(items: items));
   }
 
