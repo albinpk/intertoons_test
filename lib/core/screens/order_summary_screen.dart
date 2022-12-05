@@ -24,11 +24,83 @@ class OrderSummaryScreen extends StatelessWidget {
           return ListView.builder(
             itemExtent: 150,
             itemCount: state.items.length,
+            physics: const BouncingScrollPhysics(),
+            padding: const EdgeInsets.only(bottom: 30),
             itemBuilder: (context, index) {
               return _ListItem(
                 item: state.items[index],
               );
             },
+          );
+        },
+      ),
+
+      // Bottom sheet with total price and payment button
+      bottomNavigationBar: BottomSheet(
+        onClosing: () {},
+        enableDrag: false,
+        elevation: 20,
+        builder: (context) {
+          return Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 15, vertical: 25),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.stretch,
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                // Total price
+                Row(
+                  children: [
+                    Text(
+                      'Total price:',
+                      style: Theme.of(context).textTheme.titleMedium!.copyWith(
+                            fontWeight: FontWeight.w500,
+                          ),
+                    ),
+                    Expanded(
+                      child: BlocSelector<CartCubit, CartState, double>(
+                        selector: (state) {
+                          return state.items.fold<double>(
+                            0,
+                            (previousValue, item) {
+                              final list = context
+                                  .read<HomeViewCubit>()
+                                  .state
+                                  .featuredProducts
+                                  .where((p) => p.id == item.productId);
+                              assert(list.length == 1);
+                              final product = list.first;
+                              final price = product.specialPrice == 0
+                                  ? product.price
+                                  : product.specialPrice;
+
+                              return previousValue + price * item.productCount;
+                            },
+                          );
+                        },
+                        builder: (context, totalAmount) {
+                          return Text(
+                            '\$$totalAmount',
+                            textAlign: TextAlign.end,
+                            style: Theme.of(context).textTheme.titleLarge,
+                          );
+                        },
+                      ),
+                    ),
+                  ],
+                ),
+                const SizedBox(height: 20),
+
+                // Payment button
+                ElevatedButton(
+                  style: ElevatedButton.styleFrom(
+                    backgroundColor: primaryColor,
+                    fixedSize: const Size(double.infinity, 50),
+                  ),
+                  onPressed: () {},
+                  child: const Text('PROCEED TO PAYMENT'),
+                ),
+              ],
+            ),
           );
         },
       ),
