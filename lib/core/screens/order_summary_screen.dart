@@ -105,27 +105,31 @@ class _ListItem extends StatelessWidget {
             ),
 
             Expanded(
-              child: Row(
-                children: [
-                  // Quantity button
-                  AddToCartButton(
-                    product: product,
-                    minimumSize: const Size(90, 30),
-                  ),
-                  const SizedBox(width: 50),
-
-                  // Total price
-                  Expanded(
-                    child: Text(
-                      _price(product),
-                      textAlign: TextAlign.end,
-                      style: Theme.of(context).textTheme.titleMedium!.copyWith(
-                            fontWeight: FontWeight.bold,
-                            color: primaryColor,
-                          ),
+              child: Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 8),
+                child: Row(
+                  children: [
+                    // Quantity button
+                    AddToCartButton(
+                      product: product,
+                      minimumSize: const Size(90, 30),
                     ),
-                  ),
-                ],
+                    const SizedBox(width: 50),
+
+                    // Total price
+                    Expanded(
+                      child: Text(
+                        _price(product),
+                        textAlign: TextAlign.end,
+                        style:
+                            Theme.of(context).textTheme.titleMedium!.copyWith(
+                                  fontWeight: FontWeight.bold,
+                                  color: primaryColor,
+                                ),
+                      ),
+                    ),
+                  ],
+                ),
               ),
             ),
           ],
