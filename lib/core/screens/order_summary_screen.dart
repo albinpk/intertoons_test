@@ -90,6 +90,29 @@ class OrderSummaryScreen extends StatelessWidget {
                 ),
                 const SizedBox(height: 20),
 
+                // Address
+                Text(
+                  'Address',
+                  style: Theme.of(context).textTheme.titleMedium!.copyWith(
+                        fontWeight: FontWeight.w500,
+                      ),
+                ),
+                Row(
+                  children: [
+                    const Expanded(
+                      child: Text('Address goes here..'),
+                    ),
+                    TextButton(
+                      style: TextButton.styleFrom(
+                        tapTargetSize: MaterialTapTargetSize.shrinkWrap,
+                      ),
+                      onPressed: () {},
+                      child: const Text('Change'),
+                    ),
+                  ],
+                ),
+                const SizedBox(height: 20),
+
                 // Payment button
                 ElevatedButton(
                   style: ElevatedButton.styleFrom(
