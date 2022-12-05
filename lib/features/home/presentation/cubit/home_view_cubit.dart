@@ -4,9 +4,10 @@ import 'package:equatable/equatable.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-import '../../../../core/types.dart';
 import '../../../../core/models/best_seller_product_model.dart';
 import '../../../../core/models/featured_product_model.dart';
+import '../../../../core/models/product_model.dart';
+import '../../../../core/types.dart';
 import '../../models/slider_banner.dart';
 import '../../repositories/home_repository.dart';
 
@@ -59,6 +60,22 @@ class HomeViewCubit extends Cubit<HomeViewState> {
 
   /// Refetch home data.
   void refresh() => _getHomeData();
+
+  /// Fetch products from api.
+  void getProducts() async {
+    try {
+      final json = await _repository.fetchProducts();
+      if (!json.containsKey('data')) throw 'No data';
+      final products = _getListItemFromJson(
+        json,
+        'products',
+        Product.fromMap,
+      );
+      emit(state.copyWith(allProducts: products));
+    } catch (err) {
+      log(err.toString());
+    }
+  }
 
   /// Extract and return the list of [T] contained in the [key]
   /// from the given [map] using the [converter] function.
