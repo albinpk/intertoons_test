@@ -3,9 +3,9 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:transparent_image/transparent_image.dart';
 
 import '../../../../core/constants.dart';
-import '../../../../core/cubit/cart_cubit.dart';
 import '../../../../core/models/category_model.dart';
 import '../../../../core/models/featured_product_model.dart';
+import '../../../../core/widgets/add_to_cart_button.dart';
 import '../../../home/presentation/cubit/home_view_cubit.dart';
 import '../../../home/presentation/widgets/veg_symbol.dart';
 
@@ -110,7 +110,7 @@ class _ListItem extends StatelessWidget {
                     ),
 
                     // ADD button
-                    _AddToCartButton(product: product),
+                    AddToCartButton(product: product),
                   ],
                 ),
               ],
@@ -149,86 +149,5 @@ class _ListItem extends StatelessWidget {
         ),
       ],
     );
-  }
-}
-
-class _AddToCartButton extends StatelessWidget {
-  const _AddToCartButton({
-    Key? key,
-    required this.product,
-  }) : super(key: key);
-
-  final FeaturedProduct product;
-
-  @override
-  Widget build(BuildContext context) {
-    const size = Size(70, 20);
-    final buttonStyle = TextButton.styleFrom(
-      backgroundColor: primaryColor,
-      foregroundColor: Colors.white,
-      tapTargetSize: MaterialTapTargetSize.shrinkWrap,
-      minimumSize: size,
-    );
-
-    final count = context.select(
-      (CartCubit bloc) {
-        final list = bloc.state.items.where(
-          (item) => item.productId == product.id,
-        );
-        if (list.isEmpty) return 0;
-        assert(list.length == 1);
-        return list.first.productCount;
-      },
-    );
-
-    if (count == 0) {
-      return TextButton(
-        style: buttonStyle,
-        onPressed: () => _onAdd(context),
-        child: const Text('ADD'),
-      );
-    }
-
-    return TextButtonTheme(
-      data: TextButtonThemeData(
-        style: TextButton.styleFrom(
-          foregroundColor: Colors.black87,
-          side: const BorderSide(color: Colors.black26),
-          tapTargetSize: MaterialTapTargetSize.shrinkWrap,
-          minimumSize: Size(size.width / 2.8, size.height),
-          padding: EdgeInsets.zero,
-        ),
-      ),
-      child: IconTheme(
-        data: const IconThemeData(size: 24),
-        child: Row(
-          children: [
-            TextButton(
-              child: const Icon(Icons.remove),
-              onPressed: () => _onRemove(context),
-            ),
-            Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 5),
-              child: Text(
-                '$count',
-                style: Theme.of(context).textTheme.titleMedium,
-              ),
-            ),
-            TextButton(
-              child: const Icon(Icons.add),
-              onPressed: () => _onAdd(context),
-            ),
-          ],
-        ),
-      ),
-    );
-  }
-
-  void _onAdd(BuildContext context) {
-    context.read<CartCubit>().addToCart(product);
-  }
-
-  _onRemove(BuildContext context) {
-    context.read<CartCubit>().removeFromCart(product);
   }
 }
