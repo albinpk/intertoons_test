@@ -43,7 +43,13 @@ class BottomCartBar extends StatelessWidget {
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           BlocSelector<CartCubit, CartState, int>(
-                            selector: (state) => state.items.length,
+                            selector: (state) {
+                              return state.items.fold<int>(
+                                0,
+                                (previousValue, item) =>
+                                    previousValue + item.productCount,
+                              );
+                            },
                             builder: (context, itemCount) {
                               return RichText(
                                 text: TextSpan(
