@@ -78,7 +78,7 @@ class BottomCartBar extends StatelessWidget {
                           // Total amount
                           BlocSelector<CartCubit, CartState, double>(
                             selector: (state) {
-                              return state.items.fold(
+                              return state.items.fold<double>(
                                 0,
                                 (previousValue, item) {
                                   final list = context
@@ -106,7 +106,8 @@ class BottomCartBar extends StatelessWidget {
                                   children: [
                                     const TextSpan(text: 'Total: '),
                                     TextSpan(
-                                      text: '\$$totalPrice',
+                                      text:
+                                          '\$${totalPrice.toStringAsFixed(2)}',
                                       style: const TextStyle(
                                         fontWeight: FontWeight.bold,
                                       ),
