@@ -3,7 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../constants.dart';
 import '../cubit/cart_cubit.dart';
-import '../models/product_base_model.dart';
+import '../models/product_model.dart';
 
 class AddToCartButton extends StatelessWidget {
   const AddToCartButton({
@@ -12,7 +12,7 @@ class AddToCartButton extends StatelessWidget {
     required this.minimumSize,
   });
 
-  final ProductBase product;
+  final Product product;
 
   /// Minimum size for the button.
   final Size minimumSize;

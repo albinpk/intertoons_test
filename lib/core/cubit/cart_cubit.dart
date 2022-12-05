@@ -5,7 +5,7 @@ import 'package:equatable/equatable.dart';
 import 'package:hydrated_bloc/hydrated_bloc.dart';
 
 import '../models/cart_item_model.dart';
-import '../models/product_base_model.dart';
+import '../models/product_model.dart';
 
 part 'cart_state.dart';
 
@@ -15,7 +15,7 @@ class CartCubit extends HydratedCubit<CartState> {
   /// Add a product to shopping cart.
   ///
   /// If the given [product] exists in the cart, then increment its count by 1.
-  void addToCart(ProductBase product) {
+  void addToCart(Product product) {
     final index = state.items.indexWhere((e) => e.productId == product.id);
     if (index >= 0) {
       final items = [...state.items];
@@ -38,7 +38,7 @@ class CartCubit extends HydratedCubit<CartState> {
   /// Decrease given [product]s count by 1.
   ///
   /// Remove the [product] if its count is 1.
-  void removeFromCart(ProductBase product) {
+  void removeFromCart(Product product) {
     final index = state.items.indexWhere((e) => e.productId == product.id);
     assert(index != -1);
     final items = [...state.items];
@@ -51,7 +51,7 @@ class CartCubit extends HydratedCubit<CartState> {
   }
 
   /// Delete a product to shopping cart.
-  void deleteFromCart(ProductBase product) {
+  void deleteFromCart(Product product) {
     final index = state.items.indexWhere((e) => e.productId == product.id);
     assert(index != -1);
     final items = [...state.items]..removeAt(index);

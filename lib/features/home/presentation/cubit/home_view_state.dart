@@ -30,7 +30,7 @@ class HomeViewState extends Equatable {
   final List<BestSellerProduct> bestSellerProducts;
 
   /// List of products.
-  final List<ProductBase> allProducts;
+  final List<Product> allProducts;
 
   HomeViewState copyWith({
     HomeViewStatus? status,
@@ -38,7 +38,7 @@ class HomeViewState extends Equatable {
     List<FeaturedProduct>? featuredProducts,
     List<SliderBanner>? additionalBanners,
     List<BestSellerProduct>? bestSellerProducts,
-    List<ProductBase>? allProducts,
+    List<Product>? allProducts,
   }) {
     return HomeViewState(
       status: status ?? this.status,

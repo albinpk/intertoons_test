@@ -3,7 +3,7 @@ import 'dart:convert';
 import 'package:equatable/equatable.dart';
 import 'package:uuid/uuid.dart';
 
-import 'product_base_model.dart';
+import 'product_model.dart';
 
 /// The cart item model.
 class CartItem extends Equatable {
@@ -27,7 +27,7 @@ class CartItem extends Equatable {
 
   static const _uuid = Uuid();
 
-  factory CartItem.fromProduct(ProductBase product) {
+  factory CartItem.fromProduct(Product product) {
     return CartItem(
       id: _uuid.v4(),
       productId: product.id,

@@ -139,8 +139,7 @@ class _ListItem extends StatelessWidget {
   }
 
   String _price(FeaturedProduct product) {
-    final productPrice =
-        product.specialPrice == 0 ? product.price : product.specialPrice;
+    final productPrice = product.specialPrice ?? product.price;
     final totalPrice = item.productCount * productPrice;
     return '\$$totalPrice';
   }
@@ -187,10 +186,7 @@ class _BottomSheet extends StatelessWidget {
                                 .where((p) => p.id == item.productId);
                             assert(list.length == 1);
                             final product = list.first;
-                            final price = product.specialPrice == 0
-                                ? product.price
-                                : product.specialPrice;
-
+                            final price = product.specialPrice ?? product.price;
                             return previousValue + price * item.productCount;
                           },
                         );

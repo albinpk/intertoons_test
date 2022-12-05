@@ -140,9 +140,10 @@ class _ListItem extends StatelessWidget {
                               ),
 
                               // Product variations count
-                              if (featuredProduct!.variations.isNotEmpty)
+                              if (featuredProduct!.variations?.isNotEmpty ??
+                                  false)
                                 Text(
-                                  '+${featuredProduct!.variations.length}',
+                                  '+${featuredProduct!.variations!.length}',
                                   style: const TextStyle(color: Colors.green),
                                 ),
                             ],

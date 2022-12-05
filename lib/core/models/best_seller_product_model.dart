@@ -1,93 +1,64 @@
-import 'dart:convert';
-
-import 'product_base_model.dart';
+import '../extensions/time_of_day_extension.dart';
+import 'product_model.dart';
 import 'product_variation_model.dart';
 
-/// Best seller product model.
-class BestSellerProduct extends ProductBase {
+class BestSellerProduct extends Product {
   const BestSellerProduct({
     required super.id,
     required super.name,
-    required super.sku,
-    required super.categoryId,
-    required super.categoryName,
-    required super.isVeg,
     required super.description,
+    required super.isVeg,
     required super.price,
+    required super.sku,
     required super.imageUrl,
-    required super.variations,
+    super.categoryId,
+    super.categoryName,
+    super.specialPrice,
+    super.variations,
+    super.availableFrom,
+    super.availableTo,
     required this.orderCount,
-    required this.menuStatus,
   });
 
-  /// Order count.
-  final int orderCount;
-
-  /// Menu status.
-  final bool menuStatus;
-
-  @override
-  List<Object?> get props => [
-        ...super.props,
-        orderCount,
-        menuStatus,
-      ];
-
-  Map<String, dynamic> toMap() {
-    return <String, dynamic>{
-      _kId: id,
-      _kName: name,
-      _kSku: sku,
-      _kCategoryId: categoryId,
-      _kCategoryName: categoryName,
-      _kIsVeg: isVeg,
-      _kDescription: description,
-      _kPrice: price,
-      _kImageUrl: imageUrl,
-      _kVariations: variations.map((x) => x.toMap()).toList(),
-      _kOrderCount: orderCount,
-      _kMenuStatus: menuStatus,
-    };
-  }
+  /// Product order count.
+  final int? orderCount;
 
   factory BestSellerProduct.fromMap(Map<String, dynamic> map) {
     return BestSellerProduct(
-      id: map[_kId] as int,
-      name: map[_kName] as String,
-      sku: map[_kSku] as String,
-      categoryId: int.parse(map[_kCategoryId] as String),
-      categoryName: map[_kCategoryName] as String,
-      isVeg: (map[_kIsVeg] as String) == "1" ? true : false,
-      description: map[_kDescription] as String,
-      price: double.parse(map[_kPrice] as String),
-      imageUrl: map[_kImageUrl] as String,
-      variations: map[_kVariations] == null
-          ? []
-          : List<ProductVariation>.from(
-              (map[_kVariations] as List).map<ProductVariation>(
-                (x) => ProductVariation.fromMap(x),
+      id: map[Product.kId] as int,
+      name: map[Product.kName] as String,
+      description: map[Product.kDescription] as String,
+      isVeg: map[Product.kIsVeg] == '1' ? true : false,
+      price: double.parse(map[Product.kPrice]),
+      specialPrice: map[Product.kSpecialPrice] != null
+          ? map[Product.kSpecialPrice] == 0
+              ? null
+              : double.parse(map[Product.kSpecialPrice])
+          : null,
+      sku: map[Product.kSku] as String,
+      categoryId: map[Product.kCategoryId] != null
+          ? int.parse(map[Product.kCategoryId])
+          : null,
+      categoryName: map[Product.kCategoryName] != null
+          ? map[Product.kCategoryName] as String
+          : null,
+      imageUrl: map[Product.kImageUrl] as String,
+      variations: map[Product.kVariations] != null
+          ? List<ProductVariation>.from(
+              (map[Product.kVariations] as List).map<ProductVariation?>(
+                (x) => ProductVariation.fromMap(x as Map<String, dynamic>),
               ),
-            ),
-      orderCount: map[_kOrderCount] as int? ?? 0,
-      menuStatus: (map[_kMenuStatus] as String) == '1' ? true : false,
+            )
+          : null,
+      availableFrom: map[Product.kAvailableFrom] != null
+          ? TimeOfDayX.fromString(map[Product.kAvailableFrom])
+          : null,
+      availableTo: map[Product.kAvailableTo] != null
+          ? TimeOfDayX.fromString(map[Product.kAvailableTo])
+          : null,
+      orderCount: map[_kOrderCount] != null ? map[_kOrderCount] as int : null,
     );
   }
 
-  String toJson() => json.encode(toMap());
-
-  factory BestSellerProduct.fromJson(String source) =>
-      BestSellerProduct.fromMap(json.decode(source) as Map<String, dynamic>);
-
-  static const _kId = 'id';
-  static const _kName = 'name';
-  static const _kSku = 'sku';
-  static const _kCategoryId = 'category_id';
-  static const _kCategoryName = 'category_name';
-  static const _kIsVeg = 'is_veg';
-  static const _kDescription = 'description';
-  static const _kPrice = 'price';
-  static const _kImageUrl = 'image';
-  static const _kVariations = 'variations';
   static const _kOrderCount = 'order_count';
-  static const _kMenuStatus = 'menu_status';
 }
