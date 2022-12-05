@@ -35,6 +35,19 @@ class CartCubit extends HydratedCubit<CartState> {
     );
   }
 
+  /// Remove a product to shopping cart.
+  void removeFromCart(FeaturedProduct product) {
+    final index = state.items.indexWhere((e) => e.productId == product.id);
+    assert(index != -1);
+    final items = [...state.items];
+    final item = items.removeAt(index);
+    if (item.productCount > 1) {
+      final updatedItem = item.copyWith(productCount: item.productCount - 1);
+      items.insert(index, updatedItem);
+    }
+    emit(state.copyWith(items: items));
+  }
+
   @override
   CartState fromJson(Map<String, dynamic> json) => CartState.fromMap(json);
 
