@@ -19,7 +19,11 @@ class OrderSummaryScreen extends StatelessWidget {
         backgroundColor: Colors.black87,
         title: const Text('Order Summary'),
       ),
-      body: BlocBuilder<CartCubit, CartState>(
+      body: BlocConsumer<CartCubit, CartState>(
+        listener: (context, state) {
+          // Pop the screen when the cart is empty
+          if (state.items.isEmpty) Navigator.pop(context);
+        },
         builder: (context, state) {
           return ListView.builder(
             itemExtent: 150,
