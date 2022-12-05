@@ -110,7 +110,10 @@ class _ListItem extends StatelessWidget {
                     ),
 
                     // ADD button
-                    AddToCartButton(product: product),
+                    AddToCartButton(
+                      product: product,
+                      minimumSize: const Size(70, 30),
+                    ),
                   ],
                 ),
               ],

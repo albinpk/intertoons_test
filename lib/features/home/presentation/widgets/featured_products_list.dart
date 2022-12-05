@@ -4,6 +4,7 @@ import 'package:transparent_image/transparent_image.dart';
 
 import '../../../../core/constants.dart';
 import '../../../../core/models/featured_product_model.dart';
+import '../../../../core/widgets/add_to_cart_button.dart';
 import '../cubit/home_view_cubit.dart';
 import 'veg_symbol.dart';
 
@@ -149,17 +150,9 @@ class _ListItem extends StatelessWidget {
                               const Spacer(),
 
                               // Add button
-                              TextButton(
-                                style: TextButton.styleFrom(
-                                  foregroundColor: Colors.white,
-                                  backgroundColor: primaryColor,
-                                  minimumSize: const Size(50, 25),
-                                  tapTargetSize:
-                                      MaterialTapTargetSize.shrinkWrap,
-                                  padding: EdgeInsets.zero,
-                                ),
-                                onPressed: () {},
-                                child: const Text('ADD'),
+                              AddToCartButton(
+                                product: featuredProduct!,
+                                minimumSize: const Size(50, 25),
                               ),
                             ],
                           ),

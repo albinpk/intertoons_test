@@ -9,18 +9,22 @@ class AddToCartButton extends StatelessWidget {
   const AddToCartButton({
     super.key,
     required this.product,
+    required this.minimumSize,
   });
 
   final FeaturedProduct product;
 
+  /// Minimum size for the button.
+  final Size minimumSize;
+
   @override
   Widget build(BuildContext context) {
-    const size = Size(70, 20);
     final buttonStyle = TextButton.styleFrom(
       backgroundColor: primaryColor,
       foregroundColor: Colors.white,
       tapTargetSize: MaterialTapTargetSize.shrinkWrap,
-      minimumSize: size,
+      minimumSize: minimumSize,
+      padding: EdgeInsets.zero,
     );
 
     final count = context.select(
@@ -48,7 +52,7 @@ class AddToCartButton extends StatelessWidget {
           foregroundColor: Colors.black87,
           side: const BorderSide(color: Colors.black26),
           tapTargetSize: MaterialTapTargetSize.shrinkWrap,
-          minimumSize: Size(size.width / 2.8, size.height),
+          minimumSize: Size(minimumSize.width / 3, minimumSize.height),
           padding: EdgeInsets.zero,
         ),
       ),
