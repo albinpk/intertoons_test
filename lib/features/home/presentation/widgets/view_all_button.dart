@@ -10,7 +10,7 @@ class ViewAllButton extends StatelessWidget {
         tapTargetSize: MaterialTapTargetSize.shrinkWrap,
         foregroundColor: Colors.black54,
       ),
-      onPressed: () {},
+      onPressed: () => Navigator.of(context).pushNamed('/products'),
       child: const Text('View all'),
     );
   }

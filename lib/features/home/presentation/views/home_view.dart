@@ -4,6 +4,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../../../core/constants.dart';
 import '../../../menu/presentation/cubit/menu_view_cubit.dart';
 import '../cubit/home_view_cubit.dart';
+import 'products_view.dart';
 import '../widgets/additional_banners_list.dart';
 import '../widgets/best_sellers_list.dart';
 import '../widgets/categories_list.dart';
@@ -21,10 +22,46 @@ class HomeView extends StatefulWidget {
 
 class _HomeViewState extends State<HomeView>
     with AutomaticKeepAliveClientMixin<HomeView> {
+  final _navigatorKey = GlobalKey<NavigatorState>(debugLabel: 'home-navigator');
+
   @override
   Widget build(BuildContext context) {
     super.build(context);
 
+    return WillPopScope(
+      onWillPop: () async {
+        return !await _navigatorKey.currentState!.maybePop();
+      },
+      child: Navigator(
+        key: _navigatorKey,
+        onGenerateRoute: (settings) {
+          switch (settings.name) {
+            case '/products':
+              return MaterialPageRoute(
+                builder: (context) => const ProductsView(),
+              );
+
+            default:
+              return MaterialPageRoute(
+                builder: (context) => const _Home(),
+              );
+          }
+        },
+      ),
+    );
+  }
+
+  @override
+  bool get wantKeepAlive => true;
+}
+
+class _Home extends StatelessWidget {
+  const _Home({
+    Key? key,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
     final screenSize = MediaQuery.of(context).size;
 
     return SafeArea(
@@ -93,7 +130,4 @@ class _HomeViewState extends State<HomeView>
       ),
     );
   }
-
-  @override
-  bool get wantKeepAlive => true;
 }
