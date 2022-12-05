@@ -75,9 +75,14 @@ class _Body extends StatefulWidget {
 }
 
 class _BodyState extends State<_Body> {
+  bool _didChangeDependenciesPassed = false;
+
   @override
   void didChangeDependencies() {
     super.didChangeDependencies();
+
+    if (_didChangeDependenciesPassed) return;
+    _didChangeDependenciesPassed = true;
 
     // This code is used to change the Tab when the user taps a "Category item"
     // on the home page for the first time after the app launches.
