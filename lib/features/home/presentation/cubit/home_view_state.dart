@@ -4,13 +4,14 @@ part of 'home_view_cubit.dart';
 enum HomeViewStatus { initial, loading, success, failure }
 
 @immutable
-class HomeViewState {
+class HomeViewState extends Equatable {
   const HomeViewState({
     this.status = HomeViewStatus.initial,
     this.sliderBanners = const [],
     this.featuredProducts = const [],
     this.additionalBanners = const [],
     this.bestSellerProducts = const [],
+    this.allProducts = const [],
   });
 
   /// HomeView status
@@ -28,12 +29,16 @@ class HomeViewState {
   /// List of [BestSellerProduct]s.
   final List<BestSellerProduct> bestSellerProducts;
 
+  /// List of products.
+  final List<ProductBase> allProducts;
+
   HomeViewState copyWith({
     HomeViewStatus? status,
     List<SliderBanner>? sliderBanners,
     List<FeaturedProduct>? featuredProducts,
     List<SliderBanner>? additionalBanners,
     List<BestSellerProduct>? bestSellerProducts,
+    List<ProductBase>? allProducts,
   }) {
     return HomeViewState(
       status: status ?? this.status,
@@ -41,6 +46,19 @@ class HomeViewState {
       featuredProducts: featuredProducts ?? this.featuredProducts,
       additionalBanners: additionalBanners ?? this.additionalBanners,
       bestSellerProducts: bestSellerProducts ?? this.bestSellerProducts,
+      allProducts: allProducts ?? this.allProducts,
     );
+  }
+
+  @override
+  List<Object> get props {
+    return [
+      status,
+      sliderBanners,
+      featuredProducts,
+      additionalBanners,
+      bestSellerProducts,
+      allProducts,
+    ];
   }
 }
