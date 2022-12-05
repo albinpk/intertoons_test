@@ -205,7 +205,7 @@ class _AddToCartButton extends StatelessWidget {
           children: [
             TextButton(
               child: const Icon(Icons.remove),
-              onPressed: () {},
+              onPressed: () => _onRemove(context),
             ),
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 5),
@@ -226,5 +226,9 @@ class _AddToCartButton extends StatelessWidget {
 
   void _onAdd(BuildContext context) {
     context.read<CartCubit>().addToCart(product);
+  }
+
+  _onRemove(BuildContext context) {
+    context.read<CartCubit>().removeFromCart(product);
   }
 }
