@@ -10,6 +10,7 @@ import '../widgets/categories_list.dart';
 import '../widgets/featured_products_list.dart';
 import '../widgets/home_app_bar.dart';
 import '../widgets/slider_banner_list_view.dart';
+import '../widgets/view_all_button.dart';
 
 class HomeView extends StatefulWidget {
   const HomeView({super.key});
@@ -74,9 +75,15 @@ class _HomeViewState extends State<HomeView>
                   horizontal: 10,
                   vertical: 15,
                 ),
-                child: Text(
-                  'Best sellers',
-                  style: Theme.of(context).textTheme.titleLarge,
+                child: Row(
+                  children: [
+                    Text(
+                      'Best sellers',
+                      style: Theme.of(context).textTheme.titleLarge,
+                    ),
+                    const Spacer(),
+                    const ViewAllButton(),
+                  ],
                 ),
               ),
             ),

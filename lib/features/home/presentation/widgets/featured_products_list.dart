@@ -7,6 +7,7 @@ import '../../../../core/models/featured_product_model.dart';
 import '../../../../core/widgets/add_to_cart_button.dart';
 import '../cubit/home_view_cubit.dart';
 import 'veg_symbol.dart';
+import 'view_all_button.dart';
 
 /// Featured products list view.
 class FeaturedProductsList extends StatelessWidget {
@@ -19,9 +20,15 @@ class FeaturedProductsList extends StatelessWidget {
       children: [
         Padding(
           padding: const EdgeInsets.all(10).copyWith(top: 15),
-          child: Text(
-            'Featured',
-            style: Theme.of(context).textTheme.titleLarge,
+          child: Row(
+            children: [
+              Text(
+                'Featured',
+                style: Theme.of(context).textTheme.titleLarge,
+              ),
+              const Spacer(),
+              const ViewAllButton(),
+            ],
           ),
         ),
         Expanded(
