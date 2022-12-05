@@ -36,97 +36,7 @@ class OrderSummaryScreen extends StatelessWidget {
       ),
 
       // Bottom sheet with total price and payment button
-      bottomNavigationBar: BottomSheet(
-        onClosing: () {},
-        enableDrag: false,
-        elevation: 20,
-        builder: (context) {
-          return Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 15, vertical: 25),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.stretch,
-              mainAxisSize: MainAxisSize.min,
-              children: [
-                // Total price
-                Row(
-                  children: [
-                    Text(
-                      'Total price:',
-                      style: Theme.of(context).textTheme.titleMedium!.copyWith(
-                            fontWeight: FontWeight.w500,
-                          ),
-                    ),
-                    Expanded(
-                      child: BlocSelector<CartCubit, CartState, double>(
-                        selector: (state) {
-                          return state.items.fold<double>(
-                            0,
-                            (previousValue, item) {
-                              final list = context
-                                  .read<HomeViewCubit>()
-                                  .state
-                                  .featuredProducts
-                                  .where((p) => p.id == item.productId);
-                              assert(list.length == 1);
-                              final product = list.first;
-                              final price = product.specialPrice == 0
-                                  ? product.price
-                                  : product.specialPrice;
-
-                              return previousValue + price * item.productCount;
-                            },
-                          );
-                        },
-                        builder: (context, totalAmount) {
-                          return Text(
-                            '\$$totalAmount',
-                            textAlign: TextAlign.end,
-                            style: Theme.of(context).textTheme.titleLarge,
-                          );
-                        },
-                      ),
-                    ),
-                  ],
-                ),
-                const SizedBox(height: 20),
-
-                // Address
-                Text(
-                  'Address',
-                  style: Theme.of(context).textTheme.titleMedium!.copyWith(
-                        fontWeight: FontWeight.w500,
-                      ),
-                ),
-                Row(
-                  children: [
-                    const Expanded(
-                      child: Text('Address goes here..'),
-                    ),
-                    TextButton(
-                      style: TextButton.styleFrom(
-                        tapTargetSize: MaterialTapTargetSize.shrinkWrap,
-                      ),
-                      onPressed: () {},
-                      child: const Text('Change'),
-                    ),
-                  ],
-                ),
-                const SizedBox(height: 20),
-
-                // Payment button
-                ElevatedButton(
-                  style: ElevatedButton.styleFrom(
-                    backgroundColor: primaryColor,
-                    fixedSize: const Size(double.infinity, 50),
-                  ),
-                  onPressed: () {},
-                  child: const Text('PROCEED TO PAYMENT'),
-                ),
-              ],
-            ),
-          );
-        },
-      ),
+      bottomNavigationBar: const _BottomSheet(),
     );
   }
 }
@@ -225,5 +135,107 @@ class _ListItem extends StatelessWidget {
         product.specialPrice == 0 ? product.price : product.specialPrice;
     final totalPrice = item.productCount * productPrice;
     return '\$$totalPrice';
+  }
+}
+
+/// Bottom sheet with total price, address and payment button.
+class _BottomSheet extends StatelessWidget {
+  const _BottomSheet({
+    Key? key,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return BottomSheet(
+      onClosing: () {},
+      enableDrag: false,
+      elevation: 20,
+      builder: (context) {
+        return Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 15, vertical: 25),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.stretch,
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              // Total price
+              Row(
+                children: [
+                  Text(
+                    'Total price:',
+                    style: Theme.of(context).textTheme.titleMedium!.copyWith(
+                          fontWeight: FontWeight.w500,
+                        ),
+                  ),
+                  Expanded(
+                    child: BlocSelector<CartCubit, CartState, double>(
+                      selector: (state) {
+                        return state.items.fold<double>(
+                          0,
+                          (previousValue, item) {
+                            final list = context
+                                .read<HomeViewCubit>()
+                                .state
+                                .featuredProducts
+                                .where((p) => p.id == item.productId);
+                            assert(list.length == 1);
+                            final product = list.first;
+                            final price = product.specialPrice == 0
+                                ? product.price
+                                : product.specialPrice;
+
+                            return previousValue + price * item.productCount;
+                          },
+                        );
+                      },
+                      builder: (context, totalAmount) {
+                        return Text(
+                          '\$$totalAmount',
+                          textAlign: TextAlign.end,
+                          style: Theme.of(context).textTheme.titleLarge,
+                        );
+                      },
+                    ),
+                  ),
+                ],
+              ),
+              const SizedBox(height: 20),
+
+              // Address
+              Text(
+                'Address',
+                style: Theme.of(context).textTheme.titleMedium!.copyWith(
+                      fontWeight: FontWeight.w500,
+                    ),
+              ),
+              Row(
+                children: [
+                  const Expanded(
+                    child: Text('Address goes here..'),
+                  ),
+                  TextButton(
+                    style: TextButton.styleFrom(
+                      tapTargetSize: MaterialTapTargetSize.shrinkWrap,
+                    ),
+                    onPressed: () {},
+                    child: const Text('Change'),
+                  ),
+                ],
+              ),
+              const SizedBox(height: 20),
+
+              // Payment button
+              ElevatedButton(
+                style: ElevatedButton.styleFrom(
+                  backgroundColor: primaryColor,
+                  fixedSize: const Size(double.infinity, 50),
+                ),
+                onPressed: () {},
+                child: const Text('PROCEED TO PAYMENT'),
+              ),
+            ],
+          ),
+        );
+      },
+    );
   }
 }
