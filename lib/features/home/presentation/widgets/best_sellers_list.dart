@@ -4,6 +4,7 @@ import 'package:transparent_image/transparent_image.dart';
 
 import '../../../../core/constants.dart';
 import '../../../../core/models/best_seller_product_model.dart';
+import '../../../../core/widgets/add_to_cart_button.dart';
 import '../cubit/home_view_cubit.dart';
 import 'veg_symbol.dart';
 
@@ -125,16 +126,9 @@ class _ListItem extends StatelessWidget {
                         // ADD button and price
                         Row(
                           children: [
-                            TextButton(
-                              onPressed: () {},
-                              style: TextButton.styleFrom(
-                                backgroundColor: primaryColor,
-                                foregroundColor: Colors.white,
-                                minimumSize: const Size(50, 25),
-                                padding: EdgeInsets.zero,
-                                tapTargetSize: MaterialTapTargetSize.shrinkWrap,
-                              ),
-                              child: const Text('ADD'),
+                            AddToCartButton(
+                              product: product!,
+                              minimumSize: const Size(50, 25),
                             ),
                             const SizedBox(width: 10),
 
