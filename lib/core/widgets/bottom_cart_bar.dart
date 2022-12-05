@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../features/home/presentation/cubit/home_view_cubit.dart';
 import '../cubit/cart_cubit.dart';
+import '../screens/order_summary_screen.dart';
 
 /// This widget displays the number of items in the user's cart,
 /// the total amount, and a button to view the cart.
@@ -126,7 +127,15 @@ class BottomCartBar extends StatelessWidget {
                       style: TextButton.styleFrom(
                         foregroundColor: Colors.white,
                       ),
-                      onPressed: () {},
+                      onPressed: () {
+                        Navigator.of(context).push(
+                          MaterialPageRoute(
+                            builder: (context) {
+                              return const OrderSummaryScreen();
+                            },
+                          ),
+                        );
+                      },
                       child: const Text("Goto Cart"),
                     ),
                   ],
