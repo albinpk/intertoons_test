@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../features/home/presentation/cubit/home_view_cubit.dart';
 import '../cubit/cart_cubit.dart';
+import '../cubit/products_cubit.dart';
 import '../screens/order_summary_screen.dart';
 
 /// This widget displays the number of items in the user's cart,
@@ -77,42 +78,63 @@ class BottomCartBar extends StatelessWidget {
                           const SizedBox(height: 3),
 
                           // Total amount
-                          BlocSelector<CartCubit, CartState, double>(
+                          BlocSelector<ProductsCubit, ProductsState, bool>(
                             selector: (state) {
-                              return state.items.fold<double>(
-                                0,
-                                (previousValue, item) {
-                                  final list = context
-                                      .read<HomeViewCubit>()
-                                      .state
-                                      .featuredProducts
-                                      .where((p) => p.id == item.productId);
-                                  assert(list.length == 1);
-                                  final product = list.first;
-                                  final price =
-                                      product.specialPrice ?? product.price;
-                                  return previousValue +
-                                      price * item.productCount;
-                                },
-                              );
+                              return state.status == ProductsStatus.succuss;
                             },
-                            builder: (context, totalPrice) {
-                              return RichText(
-                                text: TextSpan(
-                                  style: textTheme.titleMedium!.copyWith(
-                                    color: Colors.white,
-                                  ),
-                                  children: [
-                                    const TextSpan(text: 'Total: '),
-                                    TextSpan(
-                                      text:
-                                          '\$${totalPrice.toStringAsFixed(2)}',
-                                      style: const TextStyle(
-                                        fontWeight: FontWeight.bold,
-                                      ),
+                            builder: (context, isSuccess) {
+                              if (!isSuccess) {
+                                return const Padding(
+                                  padding: EdgeInsets.only(top: 5),
+                                  child: SizedBox(
+                                    width: 100,
+                                    child: LinearProgressIndicator(
+                                      color: Colors.grey,
+                                      backgroundColor: Colors.transparent,
                                     ),
-                                  ],
-                                ),
+                                  ),
+                                );
+                              }
+
+                              return BlocSelector<CartCubit, CartState, double>(
+                                selector: (state) {
+                                  return state.items.fold<double>(
+                                    0,
+                                    (previousValue, item) {
+                                      final list = context
+                                          .read<ProductsCubit>()
+                                          .state
+                                          .products
+                                          .where((p) => p.id == item.productId);
+                                      assert(list.length == 1);
+                                      final product = list.first;
+                                      final price =
+                                          product.specialPrice ?? product.price;
+
+                                      return previousValue +
+                                          price * item.productCount;
+                                    },
+                                  );
+                                },
+                                builder: (context, totalPrice) {
+                                  return RichText(
+                                    text: TextSpan(
+                                      style: textTheme.titleMedium!.copyWith(
+                                        color: Colors.white,
+                                      ),
+                                      children: [
+                                        const TextSpan(text: 'Total: '),
+                                        TextSpan(
+                                          text:
+                                              '\$${totalPrice.toStringAsFixed(2)}',
+                                          style: const TextStyle(
+                                            fontWeight: FontWeight.bold,
+                                          ),
+                                        ),
+                                      ],
+                                    ),
+                                  );
+                                },
                               );
                             },
                           ),
