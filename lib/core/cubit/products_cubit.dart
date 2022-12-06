@@ -3,13 +3,13 @@ import 'dart:developer';
 import 'package:equatable/equatable.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
+import '../mixins/json_extraction_mixin.dart';
 import '../models/product_model.dart';
 import '../repositories/products_repository.dart';
-import '../types.dart';
 
 part 'products_state.dart';
 
-class ProductsCubit extends Cubit<ProductsState> {
+class ProductsCubit extends Cubit<ProductsState> with JsonExtractionMixin {
   ProductsCubit({required ProductsRepository productsRepository})
       : _repository = productsRepository,
         super(const ProductsState()) {
@@ -24,7 +24,7 @@ class ProductsCubit extends Cubit<ProductsState> {
     try {
       final json = await _repository.fetchProducts();
       if (!json.containsKey('data')) throw 'No data';
-      final products = _getListItemFromJson(
+      final products = extractListFromJson(
         json,
         'products',
         Product.fromMap,
@@ -33,26 +33,6 @@ class ProductsCubit extends Cubit<ProductsState> {
     } catch (err) {
       log(err.toString());
       emit(state.copyWith(status: ProductsStatus.failure));
-    }
-  }
-
-  // TODO: Reuse
-  List<T> _getListItemFromJson<T>(
-    MapData map,
-    String key,
-    T Function(MapData map) converter,
-  ) {
-    try {
-      if (!(map['data'] as MapData).containsKey(key)) {
-        throw 'No $key in the json';
-      }
-
-      return (map['data'][key] as List)
-          .map<T>((e) => converter(e as MapData))
-          .toList();
-    } catch (err) {
-      log(err.toString());
-      rethrow;
     }
   }
 }

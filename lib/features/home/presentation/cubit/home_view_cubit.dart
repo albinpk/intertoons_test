@@ -4,16 +4,16 @@ import 'package:equatable/equatable.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
+import '../../../../core/mixins/json_extraction_mixin.dart';
 import '../../../../core/models/best_seller_product_model.dart';
 import '../../../../core/models/featured_product_model.dart';
 import '../../../../core/models/product_model.dart';
-import '../../../../core/types.dart';
 import '../../models/slider_banner.dart';
 import '../../repositories/home_repository.dart';
 
 part 'home_view_state.dart';
 
-class HomeViewCubit extends Cubit<HomeViewState> {
+class HomeViewCubit extends Cubit<HomeViewState> with JsonExtractionMixin {
   HomeViewCubit({required HomeRepository homeRepository})
       : _repository = homeRepository,
         super(const HomeViewState()) {
@@ -30,22 +30,22 @@ class HomeViewCubit extends Cubit<HomeViewState> {
       emit(
         state.copyWith(
           status: HomeViewStatus.success,
-          sliderBanners: _getListItemFromJson(
+          sliderBanners: extractListFromJson(
             json,
             'slider_banners',
             SliderBanner.fromMap,
           ),
-          featuredProducts: _getListItemFromJson(
+          featuredProducts: extractListFromJson(
             json,
             'featured_products',
             FeaturedProduct.fromMap,
           ),
-          additionalBanners: _getListItemFromJson(
+          additionalBanners: extractListFromJson(
             json,
             'additional_banners',
             SliderBanner.fromMap,
           ),
-          bestSellerProducts: _getListItemFromJson(
+          bestSellerProducts: extractListFromJson(
             json,
             'bestseller_products',
             BestSellerProduct.fromMap,
@@ -60,25 +60,4 @@ class HomeViewCubit extends Cubit<HomeViewState> {
 
   /// Refetch home data.
   void refresh() => _getHomeData();
-
-  /// Extract and return the list of [T] contained in the [key]
-  /// from the given [map] using the [converter] function.
-  List<T> _getListItemFromJson<T>(
-    MapData map,
-    String key,
-    T Function(MapData map) converter,
-  ) {
-    try {
-      if (!(map['data'] as MapData).containsKey(key)) {
-        throw 'No $key in the json';
-      }
-
-      return (map['data'][key] as List)
-          .map<T>((e) => converter(e as MapData))
-          .toList();
-    } catch (err) {
-      log(err.toString());
-      rethrow;
-    }
-  }
 }
