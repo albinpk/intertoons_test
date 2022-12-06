@@ -88,7 +88,6 @@ class ProductTile extends StatelessWidget {
                             ),
                             const SizedBox(width: 10),
 
-                            // TODO: special price
                             // Product price
                             PriceSection(product: product!),
                           ],

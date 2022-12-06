@@ -2,10 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:transparent_image/transparent_image.dart';
 
-import '../../../../core/constants.dart';
 import '../../../../core/models/featured_product_model.dart';
 import '../../../../core/widgets/add_to_cart_button.dart';
 import '../cubit/home_view_cubit.dart';
+import 'price_section.dart';
 import 'veg_symbol.dart';
 import 'view_all_button.dart';
 
@@ -154,7 +154,7 @@ class _ListItem extends StatelessWidget {
                           Row(
                             children: [
                               // Price section
-                              _buildPriceSection(textTheme),
+                              PriceSection(product: featuredProduct!),
                               const Spacer(),
 
                               // Add button
@@ -171,36 +171,6 @@ class _ListItem extends StatelessWidget {
                 ),
               ),
       ),
-    );
-  }
-
-  /// Build price widget.
-  Widget _buildPriceSection(TextTheme textTheme) {
-    final mainStyle = textTheme.titleMedium!.copyWith(
-      fontWeight: FontWeight.bold,
-      color: primaryColor,
-    );
-
-    // Return the actual price if there is no discount.
-    if (!featuredProduct!.hasDiscount) {
-      return Text('\$${featuredProduct!.price}', style: mainStyle);
-    }
-
-    // If the product has a discount, display both the discounted and the actual price.
-    return Row(
-      children: [
-        Text('\$${featuredProduct!.specialPrice}', style: mainStyle),
-        const SizedBox(width: 10),
-
-        // Actual price
-        Text(
-          '\$${featuredProduct!.price}',
-          style: textTheme.titleSmall!.copyWith(
-            color: Colors.grey,
-            decoration: TextDecoration.lineThrough,
-          ),
-        ),
-      ],
     );
   }
 }
