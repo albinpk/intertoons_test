@@ -2,11 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:transparent_image/transparent_image.dart';
 
-import '../../features/home/presentation/cubit/home_view_cubit.dart';
 import '../constants.dart';
 import '../cubit/cart_cubit.dart';
+import '../cubit/products_cubit.dart';
 import '../models/cart_item_model.dart';
-import '../models/featured_product_model.dart';
+import '../models/product_model.dart';
 import '../widgets/add_to_cart_button.dart';
 
 class OrderSummaryScreen extends StatelessWidget {
@@ -56,7 +56,7 @@ class _ListItem extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final product = context.select(
-      (HomeViewCubit bloc) => bloc.state.featuredProducts.singleWhere(
+      (ProductsCubit bloc) => bloc.state.products.singleWhere(
         (p) => p.id == item.productId,
       ),
     );
@@ -138,7 +138,7 @@ class _ListItem extends StatelessWidget {
     );
   }
 
-  String _price(FeaturedProduct product) {
+  String _price(Product product) {
     final productPrice = product.specialPrice ?? product.price;
     final totalPrice = item.productCount * productPrice;
     return '\$$totalPrice';
@@ -180,9 +180,9 @@ class _BottomSheet extends StatelessWidget {
                           0,
                           (previousValue, item) {
                             final list = context
-                                .read<HomeViewCubit>()
+                                .read<ProductsCubit>()
                                 .state
-                                .featuredProducts
+                                .products
                                 .where((p) => p.id == item.productId);
                             assert(list.length == 1);
                             final product = list.first;
