@@ -4,6 +4,8 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'core/constants.dart';
 import 'core/cubit/cart_cubit.dart';
 import 'core/cubit/navigation_cubit.dart';
+import 'core/cubit/products_cubit.dart';
+import 'core/repositories/products_repository.dart';
 import 'core/widgets/bottom_cart_bar.dart';
 import 'features/account/presentation/views/account_view.dart';
 import 'features/home/presentation/cubit/home_view_cubit.dart';
@@ -21,12 +23,18 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MultiRepositoryProvider(
       providers: [
+        RepositoryProvider(create: (context) => ProductsRepository()),
         RepositoryProvider(create: (context) => HomeRepository()),
         RepositoryProvider(create: (context) => MenuRepository()),
       ],
       child: MultiBlocProvider(
         providers: [
           BlocProvider(create: (context) => NavigationCubit()),
+          BlocProvider(
+            create: (context) => ProductsCubit(
+              productsRepository: context.read<ProductsRepository>(),
+            ),
+          ),
           BlocProvider(create: (context) => CartCubit()),
           BlocProvider(
             create: (context) => HomeViewCubit(
