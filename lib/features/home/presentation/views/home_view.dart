@@ -2,9 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../../core/constants.dart';
+import '../../../../core/cubit/navigation_cubit.dart';
 import '../../../menu/presentation/cubit/menu_view_cubit.dart';
 import '../cubit/home_view_cubit.dart';
-import 'products_view.dart';
 import '../widgets/additional_banners_list.dart';
 import '../widgets/best_sellers_list.dart';
 import '../widgets/categories_list.dart';
@@ -12,6 +12,7 @@ import '../widgets/featured_products_list.dart';
 import '../widgets/home_app_bar.dart';
 import '../widgets/slider_banner_list_view.dart';
 import '../widgets/view_all_button.dart';
+import 'products_view.dart';
 
 class HomeView extends StatefulWidget {
   const HomeView({super.key});
@@ -30,7 +31,12 @@ class _HomeViewState extends State<HomeView>
 
     return WillPopScope(
       onWillPop: () async {
-        return !await _navigatorKey.currentState!.maybePop();
+        final navigationCubit = context.read<NavigationCubit>();
+        if (navigationCubit.state.currentTab == 0) {
+          return !await _navigatorKey.currentState!.maybePop();
+        }
+        navigationCubit.changeTab(0);
+        return false;
       },
       child: Navigator(
         key: _navigatorKey,
