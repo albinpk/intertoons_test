@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:transparent_image/transparent_image.dart';
 
-import '../../../../core/constants.dart';
 import '../../../../core/models/product_model.dart';
 import '../../../../core/widgets/add_to_cart_button.dart';
+import 'price_section.dart';
 import 'veg_symbol.dart';
 
 class ProductTile extends StatelessWidget {
@@ -21,8 +21,6 @@ class ProductTile extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final textTheme = Theme.of(context).textTheme;
-
     return Padding(
       padding: const EdgeInsets.all(10).copyWith(top: 0),
       child: product == null
@@ -60,9 +58,10 @@ class ProductTile extends StatelessWidget {
                             Expanded(
                               child: Text(
                                 product!.name,
-                                style: textTheme.titleMedium!.copyWith(
-                                  fontWeight: FontWeight.w500,
-                                ),
+                                style: Theme.of(context)
+                                    .textTheme
+                                    .titleMedium!
+                                    .copyWith(fontWeight: FontWeight.w500),
                                 overflow: TextOverflow.ellipsis,
                                 maxLines: 1,
                               ),
@@ -91,13 +90,7 @@ class ProductTile extends StatelessWidget {
 
                             // TODO: special price
                             // Product price
-                            Text(
-                              '\$${product!.price}',
-                              style: textTheme.titleSmall!.copyWith(
-                                color: primaryColor,
-                                fontWeight: FontWeight.bold,
-                              ),
-                            ),
+                            PriceSection(product: product!),
                           ],
                         ),
                       ],
