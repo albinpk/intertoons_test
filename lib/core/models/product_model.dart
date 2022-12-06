@@ -124,9 +124,8 @@ class Product extends Equatable {
       categoryId: map[kCategoryId] != null ? map[kCategoryId] as int : null,
       categoryName:
           map[kCategoryName] != null ? map[kCategoryName] as String : null,
-      // TODO: fix null image
       imageUrl: map[kImageUrl] as String? ??
-          'https://images.unsplash.com/flagged/photo-1593005510509-d05b264f1c9c?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=870&q=80',
+          'https://media.istockphoto.com/id/1222357475/vector/image-preview-icon-picture-placeholder-for-website-or-ui-ux-design-vector-illustration.jpg?s=612x612&w=0&k=20&c=KuCo-dRBYV7nz2gbk4J9w1WtTAgpTdznHu55W9FjimE=',
       variations: map[kVariations] != null
           ? List<ProductVariation>.from(
               (map[kVariations] as List).map<ProductVariation?>(
