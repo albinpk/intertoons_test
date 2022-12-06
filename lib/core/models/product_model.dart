@@ -129,7 +129,7 @@ class Product extends Equatable {
           'https://images.unsplash.com/flagged/photo-1593005510509-d05b264f1c9c?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=870&q=80',
       variations: map[kVariations] != null
           ? List<ProductVariation>.from(
-              (map[kVariations] as List<int>).map<ProductVariation?>(
+              (map[kVariations] as List).map<ProductVariation?>(
                 (x) => ProductVariation.fromMap(x as Map<String, dynamic>),
               ),
             )
