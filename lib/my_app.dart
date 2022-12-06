@@ -106,6 +106,7 @@ class _HomePageState extends State<_HomePage> {
             BottomNavigationBar(
               currentIndex: _currentIndex,
               selectedItemColor: primaryColor,
+              selectedLabelStyle: const TextStyle(fontWeight: FontWeight.w500),
               unselectedFontSize: 14,
               onTap: (i) => context.read<NavigationCubit>().changeTab(i),
               type: BottomNavigationBarType.fixed,
