@@ -38,3 +38,11 @@ flutter_icons:
   ios: true
   remove_alpha_ios: true
   image_path: "assets/icons/app-icon.png"
+
+# flutter_native_splash config
+flutter_native_splash:
+  color: "#FFFFFF"
+  image: "./assets/icons/splash-icon.png"
+  android_12:
+    color: "#FFFFFF"
+    image: "./assets/icons/splash-icon.png"
