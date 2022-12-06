@@ -2,7 +2,7 @@
     package="com.example.intertoons_test">
    <uses-permission android:name="android.permission.INTERNET" /> 
    <application
-        android:label="intertoons_test"
+        android:label="Intertoons Test App"
         android:name="${applicationName}"
         android:icon="@mipmap/ic_launcher">
         <activity
