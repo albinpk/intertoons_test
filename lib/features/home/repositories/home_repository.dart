@@ -13,15 +13,4 @@ class HomeRepository {
       headers: {'Authorization': authToken},
     ).then<MapData>((res) => json.decode(res.body) as MapData);
   }
-
-  /// Fetch all products from api.
-  Future<MapData> fetchProducts() {
-    return http
-        .post(
-          Uri.parse('$apiBase/products'),
-          headers: {'Authorization': authToken},
-          body: json.encode({"currentpage": 1, "pagesize": 100}),
-        )
-        .then<MapData>((res) => json.decode(res.body) as MapData);
-  }
 }

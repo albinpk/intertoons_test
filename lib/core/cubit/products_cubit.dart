@@ -29,7 +29,6 @@ class ProductsCubit extends Cubit<ProductsState> {
         'products',
         Product.fromMap,
       );
-      log(products.length.toString());
       emit(state.copyWith(products: products, status: ProductsStatus.succuss));
     } catch (err) {
       log(err.toString());
